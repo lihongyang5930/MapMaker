@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.SimpleMap</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.SimpleMap.SimpleMapPlugin">
+            <summary>
+            Adds a simple map to the program.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.SimpleMap.SimpleMapPlugin.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.SimpleMap.SimpleMapPlugin"/> class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.SimpleMap.SimpleMapPlugin.Priority">
+            <summary>
+            Gets the priority. It's a very low value so it will be loaded at the beginning.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.SimpleMap.SimpleMapPlugin.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.SimpleMap.SimpleMapPlugin.Deactivate">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

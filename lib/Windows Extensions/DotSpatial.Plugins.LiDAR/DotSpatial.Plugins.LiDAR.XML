@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.LiDAR</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.LiDAR.LiDarDataSet">
+            <summary>
+            LiDarDataSet
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.LiDAR.LiDarDataSet"/> class.
+            </summary>
+            <param name="filename">Name of the file that is used in this dataset.</param>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.CanReproject">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.Extent">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.Filename">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.FilePath">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.IsDisposed">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.IsDisposeLocked">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.ProgressHandler">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.Projection">
+            <inheritdoc />
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarDataSet.ProjectionString">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.Close">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.GetPointArray(DotSpatial.Data.Extent)">
+            <summary>
+            This method simulates loading the array of points from the LAS file.
+            Right now it is generating random points that are within the
+            view extent.
+            </summary>
+            <param name="boundingBox">the view extent</param>
+            <returns>array of the points in [x y x y ... order]</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.LockDispose">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.Reproject(DotSpatial.Projections.ProjectionInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarDataSet.UnlockDispose">
+            <inheritdoc />
+        </member>
+        <member name="T:DotSpatial.Plugins.LiDAR.LiDarLayer">
+            <summary>
+            Layer used for LiDAR data.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.LiDAR.LiDarLayer"/> class.
+            </summary>
+        </member>
+        <member name="E:DotSpatial.Plugins.LiDAR.LiDarLayer.BufferChanged">
+            <summary>
+            Occurs when drawing content has changed on the buffer for this layer
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.BackBuffer">
+            <summary>
+            Gets or sets the back buffer that will be drawn to as part of the initialization process.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.Buffer">
+            <summary>
+            Gets or sets the current buffer.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.BufferEnvelope">
+            <summary>
+            Gets or sets the geographic region represented by the buffer
+            Calling Initialize will set this automatically.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.BufferRectangle">
+            <summary>
+            Gets or sets the rectangle in pixels to use as the back buffer.
+            Calling Initialize will set this automatically.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.ChunkSize">
+            <summary>
+            Gets or sets the chunk size.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.DataSet">
+            <summary>
+            Gets or sets  the dataset.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.EditMode">
+            <summary>
+            Gets a value indicating whether the layer is in edit mode.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.LiDAR.LiDarLayer.Extent">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.Clear(System.Collections.Generic.List{System.Drawing.Rectangle},System.Drawing.Color)">
+            <summary>
+            Call StartDrawing before using this.
+            </summary>
+            <param name="rectangles">The rectangular region in pixels to clear.</param>
+            <param name= "color">The color to use when clearing.  Specifying transparent
+            will replace content with transparent pixels.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.DrawRegions(DotSpatial.Controls.MapArgs,System.Collections.Generic.List{DotSpatial.Data.Extent},System.Boolean)">
+            <summary>
+            This will draw any features that intersect this region.  To specify the features
+            directly, use OnDrawFeatures.  This will not clear existing buffer content.
+            For that call Initialize instead.
+            </summary>
+            <param name="args">A GeoArgs clarifying the transformation from geographic to image space</param>
+            <param name="regions">The geographic regions to draw</param>
+            <param name="selected">Indicates whether only the selected elements should be drawn. This does nothing if selected is true, because this layer can't have selected elements.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.FinishDrawing">
+            <summary>
+            Indicates that the drawing process has been finalized and swaps the back buffer
+            to the front buffer.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.StartDrawing(System.Boolean)">
+            <summary>
+            Copies any current content to the back buffer so that drawing should occur on the
+            back buffer (instead of the fore-buffer).  Calling draw methods without
+            calling this may cause exceptions.
+            </summary>
+            <param name="preserve">Boolean, true if the front buffer content should be copied to the back buffer
+            where drawing will be taking place.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.OnBufferChanged(System.Collections.Generic.List{System.Drawing.Rectangle})">
+            <summary>
+            Fires the OnBufferChanged event
+            </summary>
+            <param name="clipRectangles">The Rectangle in pixels</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.OnFinishDrawing">
+            <summary>
+            Indiciates that whatever drawing is going to occur has finished and the contents
+            are about to be flipped forward to the front buffer.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarLayer.OnStartDrawing">
+            <summary>
+            Occurs when a new drawing is started, but after the BackBuffer has been established.
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.LiDAR.LiDarProvider">
+            <summary>
+            This allows to add LiDAR layers to the project.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarProvider.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarProvider.ButtonClick(System.Object,System.EventArgs)">
+            <summary>
+            Adds a new LiDAR Layer.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.LiDAR.LiDarProvider.Deactivate">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

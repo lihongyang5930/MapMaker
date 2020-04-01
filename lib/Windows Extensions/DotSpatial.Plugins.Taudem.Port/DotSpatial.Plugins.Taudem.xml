@@ -1,0 +1,605 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.Taudem</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.Taudem.DataManagement">
+            <summary>
+            The DataManagement namespace will contain basic file handling routines
+            such as copy and delete, as well as some more complex methods for appending and merging..
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.DataManagement.CopyShapefile(System.String,System.String)">
+            <summary>
+            Copies a shapefile and all associated files.
+            </summary>
+            <param name="oldShapefilePath">Full path to the original shapefile (including .shp extension).</param>
+            <param name="newShapefilePath">Full path to where the copy should be saved (including .shp extension).</param>
+            <returns>False if an error was encoutered, true otherwise.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.DataManagement.TryCopy(System.String,System.String)">
+            <summary>
+            Attempts to copy a file
+            </summary>
+            <param name="oldName">The old filename</param>
+            <param name="newName">The new filename</param>
+            <returns>True on success</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.DataManagement.DeleteGrid(System.String)">
+            <summary>
+            Deletes the grid.
+            </summary>
+            <param name="tmpClipPath">Path of the grid that should be deleted.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.Hydrology">
+            <summary>
+            The Hydrology algorithms are especially designed for working with DEMs in the context
+            of modeling hydrological processes.
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.Hydrology.DsNode">
+            <summary>
+            DsNode
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.DsNode.Outlet">
+            <summary>
+            Indicates an outlet.
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.DsNode.Inlet">
+            <summary>
+            Indicates an inlet.
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.DsNode.Reservoir">
+            <summary>
+            Indicates a reservoir.
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.DsNode.PointSource">
+            <summary>
+            Indicates a point source.
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits">
+            <summary>
+            Enum for elevation units used in DEMs
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits.Meters">
+            <summary>
+            Meters = 0
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits.Centimeters">
+            <summary>
+            Centimeters = 1
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits.Feet">
+            <summary>
+            Feet = 2
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyJoinBasinAreaAttributes(System.String,DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            A function to apply attributes to a joined basin shapefile.
+            </summary>
+            <param name="joinBasinShapePath">Path of the featureset that gets edited.</param>
+            <param name="elevUnits">Not used.</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyJoinBasinStreamAttributes(System.String,System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            A function that updates the mean width, mean height, length, and slope in the given shape file.
+            </summary>
+            <param name="networkShapePath">The path to the streams network shapefile</param>
+            <param name="basinShapePath">The path to the unjoined watershed shapefile</param>
+            <param name="joinBasinShapePath">The path to the Joined Basins shapefile</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyStreamAttributes(System.String,System.String,System.String,DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Hydrology function used to add to the stream shapefile attributes.
+            </summary>
+            <param name="streamNetworkShapePath">Path of the stream network file.</param>
+            <param name="demPath">Path of the dem file.</param>
+            <param name="subBasinShapePath">Path of the sub basin shapefile.</param>
+            <param name="elevUnits">The elevation units.</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyWatershedAreaAttributes(System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            A function to apply area attributes to a watershed polygon shapefile
+            </summary>
+            <param name="subBasinShapePath">Subbasin shapefile</param>
+            <param name="callback">Callback object</param>
+            <returns>True on success</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyWatershedElevationAttribute(System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Hydrology function used to add to the subbasin shapefile average elevation attribute
+            </summary>
+            <param name="subBasinShapePath">Subbasin shapefile</param>
+            <param name="elevGridPath">Path of the raster.</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyWatershedElevationAttribute(System.String,System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Hydrology function used to add to the subbasin shapefile average elevation attribute.
+            </summary>
+            <param name="subBasinGridPath">Path of the sub basin grid file.</param>
+            <param name="subBasinShapePath">Subbasin shapefile</param>
+            <param name="elevGridPath">Path of the elevation grid file.</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True on success</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyWatershedLinkAttributes(System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Hydrology function to apply the watershed link attributes copied or interpreted from the stream network.
+            </summary>
+            <param name="subBasinShapePath">Subbasin shapefile</param>
+            <param name="streamNetworkShapePath">Path of the stream network shapefile.</param>
+            <param name="callback">The progress handler</param>
+            <returns>0 on success</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyWatershedSlopeAttribute(System.String,System.String,DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Hydrology function used to add to the subbasin shapefile average slope attribute.
+            </summary>
+            <param name="subBasinShapePath">Path of the sub basin shapefile.</param>
+            <param name="slopeGridPath">Path of the slope grid.</param>
+            <param name="elevUnits">The elevation units.</param>
+            <param name="callback">The progress handler</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ApplyWatershedSlopeAttribute(System.String,System.String,System.String,DotSpatial.Plugins.Taudem.Hydrology.ElevationUnits,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Hydrology function used to add to the subbasin shapefile average slope attribute.
+            </summary>
+            <param name="subBasinGridPath">Path of the sub basin grid.</param>
+            <param name="subBasinShapePath">Path of the sub basin shapefile.</param>
+            <param name="slopeGridPath">Path of the slope grid.</param>
+            <param name="elevUnits">The elevation units.</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.AreaD8(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Uses TauDEM V5
+            Generates an area D8 grid which shows the paths of highest flow and can be used to delineate stream networks.
+            </summary>
+            <param name="d8Path">Path to a D8 grid to be converted into an area D8 grid.</param>
+            <param name="outletsPath">Optional path to a point shape file which is used to designate outlet points on a grid. If this path is given, the resulting area D8 grid will only include values for those areas of the grid which flow into the outlet points given. All other portions of the grid will be set to 0.</param>
+            <param name="areaD8ResultPath">Path to an area D8 output grid, </param>
+            <param name="useOutlets">Boolean true for using outlets in delineation d8 areas</param>
+            <param name="useEdgeContamCheck">Boolean true to ignore off-grid contributing area</param>
+            <param name="numProcesses">Number of threads to be used by Taudem</param>
+            <param name="showTaudemOutput">Show Taudem output if true</param>
+            <param name="callback"> A callback object for internal status messages</param>
+            <returns>Integer representing successful creation on 0 or some error state otherwise.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.BuildJoinedBasins(System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            A function to create the joined basins from a watershed shapefile that has had the basic apply attributes set on it.
+            </summary>
+            <param name="subBasinShapePath">Path of the sub basin shapefile.</param>
+            <param name="joinBasinShapeResultPath">Path of the resulting shapefile.</param>
+            <param name="callback">The progress handler</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.BuildJoinedBasins(System.String,System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Overload of BuildJoinedBasins that takes an outlets shape path used for Inlets resolution. If no outlets/inlets path given, it will treat all points as outlets.
+            </summary>
+            <param name="subBasinShapePath">Path of the sub basin shapefile.</param>
+            <param name="outletsShapePath">Path of the outlets shapefile.</param>
+            <param name="joinBasinShapeResultPath">Path of the resulting shapefile.</param>
+            <param name="callback">The progress handler.</param>
+            <returns>True, if run successfully.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.D8(System.String,System.String,System.String,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Uses TauDEM V5
+            Generates a D8 directional grid by assigning a number from 1 to 8 (0 to 7 in some algorithms) based on a direction to the lowest elevation cell surrounding that cell.
+            </summary>
+            <param name="pitFillPath">Path of a pit-filled DEM.</param>
+            <param name="d8ResultPath">Output result file of a D8 directional grid.</param>
+            <param name="d8SlopeResultPath">Path to an output grid containing the slope from the cell to the lowest elevation surrounding cell.</param>
+            <param name="numProcesses">Number of threads to be used by Taudem</param>
+            <param name="showTaudemOutput">Show Taudem output if true</param>
+            <param name="callback"> A callback object for internal status messages</param>
+            <returns>Integer representing successful creation on 0 or some error state otherwise.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.DelinStreamGrids(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,System.Boolean,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            A function which will make appropriate calls to Taudem in order to form the network grids used in delineation.
+            </summary>
+            <param name="demGridPath">Path of the dem grid file.</param>
+            <param name="pitFillPath">Path of the pit fill file.</param>
+            <param name="d8Path">Path of the D8 file.</param>
+            <param name="d8SlopePath">Path of the D8 slope file.</param>
+            <param name="areaD8Path">Path of the D8 area file.</param>
+            <param name="outletsPath">Path of the outlets file.</param>
+            <param name="strahlOrdResultPath">Path of the resulting strahl order file.</param>
+            <param name="longestUpslopeResultPath">Path of the resulting longest upslope file.</param>
+            <param name="totalUpslopeResultPath">Path of the resulting total upslope file.</param>
+            <param name="streamGridResultPath">Path of the resulting stream grid file.</param>
+            <param name="streamOrdResultPath">Path of the resulting stream order file.</param>
+            <param name="treeDatResultPath">Path of the resultingtree data file.</param>
+            <param name="coordDatResultPath">Path of the resulting coordinate data file.</param>
+            <param name="streamShapeResultPath">Path of the resulting stream shape file.</param>
+            <param name="watershedGridResultPath">Path of the resulting watershed file.</param>
+            <param name="threshold">The threshold.</param>
+            <param name="useOutlets">Use outlets</param>
+            <param name="useEdgeContamCheck">Use edge contam check.</param>
+            <param name="numProcesses">Number of threads to be used by Taudem</param>
+            <param name="showTaudemOutput">Show Taudem output if true</param>
+            <param name="callback">The progress handler.</param>
+            <returns>Return code from Taudem executable</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.DelinStreamGrids(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            An overload of delinStreamGrids which allows the use of Dinf in the delineation.
+            </summary>
+            <param name="demGridPath">Path of the dem grid file.</param>
+            <param name="pitFillPath">Path of the pit fill file.</param>
+            <param name="d8Path">Path of the D8 file.</param>
+            <param name="d8SlopePath">Path of the D8 slope file.</param>
+            <param name="areaD8Path">Path of the D8 area file.</param>
+            <param name="areaDInfPath">Path of the area DInf file.</param>
+            <param name="outletsPath">Path of the outlets file.</param>
+            <param name="strahlOrdResultPath">Path of the resulting strahl order file.</param>
+            <param name="longestUpslopeResultPath">Path of the resulting longest upslope file.</param>
+            <param name="totalUpslopeResultPath">Path of the resulting total upslope file.</param>
+            <param name="streamGridResultPath">Path of the resulting stream grid file.</param>
+            <param name="streamOrdResultPath">Path of the resulting stream order file.</param>
+            <param name="treeDatResultPath">Path of the resultingtree data file.</param>
+            <param name="coordDatResultPath">Path of the resulting coordinate data file.</param>
+            <param name="streamShapeResultPath">Path of the resulting stream shape file.</param>
+            <param name="watershedGridResultPath">Path of the resulting watershed file.</param>
+            <param name="threshold">The threshold.</param>
+            <param name="useOutlets">Use outlets</param>
+            <param name="useEdgeContamCheck">Use edge contam check.</param>
+            <param name="useDinf">Use DInf.</param>
+            <param name="numProcesses">Number of threads to be used by Taudem</param>
+            <param name="showTaudemOutput">Show Taudem output if true</param>
+            <param name="callback">The progress handler.</param>
+            <returns>Return code from Taudem executable</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.DInf(System.String,System.String,System.String,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>A function to call the Taudem d-infinity calculations</summary>
+            <param name="pitFillPath">Path of the pit fill file.</param>
+            <param name="dInfResultPath">Path of the resulting dInf File.</param>
+            <param name="dInfSlopeResultPath">Path of the resulting dInf slope file.</param>
+            <param name="numProcesses">Number of threads to be used by Taudem</param>
+            <param name="showTaudemOutput">Show Taudem output if true</param>
+            <param name="callback">The progress handler.</param>
+            <returns>Return code from Taudem executable</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.Fill(System.String,System.String,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Fills depressions in an image
+            - Files specified by parameters
+            - Progress and status messages will be sent back via IProgressHandler
+            - Frames will be sized to default values
+            </summary>
+            <param name="sourceFile">String filename of unfilled DEM</param>
+            <param name="destFile">String filename of output file</param>
+            <param name="progress">The progress.</param>
+            <remarks>
+            Images too large to process all at once are broken down into a framework.
+            A frame represents what will be loaded into memory at any given time.
+            </remarks>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.RunAllStreamDelineation(System.String,System.String,System.Int32,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>Runs threshold.exe</summary>
+            <param name="areaD8Path">Input file</param>
+            <param name="streamGridResultPath">Output file</param>
+            <param name="threshold">The threshold</param>
+            <param name="numProcesses">Number of processes</param>
+            <param name="showTaudemOutput">Show taudem output</param>
+            <param name="callback">Callback objet</param>
+            <returns>Taudem return number, 0 means OK</returns>
+            <remarks>Created by Paul Meems, 23 Aug 2011</remarks>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.RunGridNetwork(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Runs GridNet.exe
+            </summary>
+            <param name="demGridPath">Input file</param>
+            <param name="d8Path">Path of the D8 file.</param>
+            <param name="longestUpslopeResultPath">Output file</param>
+            <param name="totalUpslopeResultPath">Path of the resulting total upslope file.</param>
+            <param name="strahlOrdResultPath">Path of the resulting strahl order file.</param>
+            <param name="outletsPath">Path of the outlets file.</param>
+            <param name="useOutlets">Use outlets</param>
+            <param name="numProcesses">Number of processes</param>
+            <param name="showTaudemOutput">Show taudem output</param>
+            <param name="callback">Callback objet</param>
+            <returns>
+            Taudem return number, 0 means OK
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.RunStreamOrderGridRaster(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Int32,System.Boolean,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Call StreamNet.exe
+            </summary>
+            <param name="demGridPath">Input file</param>
+            <param name="pitFillPath">Path of the pit fill file.</param>
+            <param name="d8Path">Path of the D8 file.</param>
+            <param name="areaD8Path">Path of the area D8 file.</param>
+            <param name="outletsPath">Path of the outlets file.</param>
+            <param name="streamGridResultPath">Output file</param>
+            <param name="streamOrdResultPath">Path of the resulting stream ord file.</param>
+            <param name="streamShapeResultPath">Path of the resulting stream shape file.</param>
+            <param name="watershedGridResultPath">Path of the resulting watershed grid file.</param>
+            <param name="coordDatResultPath">Path of the resulting coordinate data file.</param>
+            <param name="treeDatResultPath">Path of the resulting tree data file.</param>
+            <param name="useOutlets">Use outlets</param>
+            <param name="numProcesses">Number of processes</param>
+            <param name="showTaudemOutput">Show taudem output</param>
+            <param name="callback">Callback objet</param>
+            <returns>
+            Taudem return number, 0 means OK
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.RunTaudem(System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Run a Taudem V5 executable
+            </summary>
+            <param name="command">Taudem executable file name</param>
+            <param name="parameters">Parameters for Taudem executable.  Parameters containing spaces must be quoted.</param>
+            <param name="numProc">Maximum number of threads (ignored if MPICH2 not running)</param>
+            <param name="showOutput">Standard output and standard error from Taudem executable are shown iff this flag is true or there is an error in the Taudem run.</param>
+            <returns>
+            Return code from Taudem executable
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.SignedArea(DotSpatial.Data.IFeature)">
+            <summary>
+            Returns the signed area for a polygon shape.
+            The area is positive if the polygon runs clockwise.
+            </summary>
+            <param name="shape">Shape to get the area from.</param>
+            <returns>The area of the shape.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.AddField(DotSpatial.Data.IFeatureSet,System.String,System.Type,System.Int32,System.Int32)">
+            <summary>
+            Adds a field to the shapefile
+            </summary>
+            <param name="sf">The shapefile</param>
+            <param name="fieldname">The fieldname</param>
+            <param name="fieldType">The field type</param>
+            <param name="width">The width.</param>
+            <param name="precision">The precision</param>
+            <returns>The index of the inserted field</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.AddField(DotSpatial.Data.IFeatureSet,System.String,System.Type)">
+            <summary>
+            Overloaded method to add a field to the shapefile
+            </summary>
+            <param name="sf">The shapefile</param>
+            <param name="fieldname">The fieldname.</param>
+            <param name="fieldType">The field type.</param>
+            <returns>The index of the inserted field.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.DoFill(DotSpatial.Data.IRaster,DotSpatial.Data.IRaster,System.Boolean,System.Int32,System.Int32,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Performs a Pitfill. Returns true unless the operation was canceled by the dialog
+            </summary>
+            <param name="sourceGrid">The source Grid.</param>
+            <param name="destGrid">The dest Grid.</param>
+            <param name="showProgressDialog">The show Progress Dialog.</param>
+            <param name="frameWidth">The frame Width.</param>
+            <param name="frameHeight">The frame Height.</param>
+            <param name="progress">The progress.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.FileFill(System.String,System.String,System.Boolean,System.Boolean,System.Int32,System.Int32,DotSpatial.Data.IProgressHandler)">
+            <summary>
+            Internal File handling
+            </summary>
+            <param name="sourceFile">The Source File. </param>
+            <param name="destFile">The Dest File. </param>
+            <param name="overwrite">The Overwrite. </param>
+            <param name="showProgressDialog">The Show Progress Dialog. </param>
+            <param name="frameWidth">The Frame Width. </param>
+            <param name="frameHeight">The Frame Height. </param>
+            <param name="callBack">The CallBack. </param>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.GetDrainageFromSubbasin(DotSpatial.Data.IFeatureSet,DotSpatial.Data.IFeatureSet,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Build drainage tree recursively upstream from outlet or reservoir, stopping at inlet, outlet, or reservoir (ignoring point sources)
+            </summary>
+            <param name="shed">Watershed featureset</param>
+            <param name="outlets">Featureset with the outlets.</param>
+            <param name="haveOutletsShapefile">if this is false any dsnode not -1 stops the tree </param>
+            <param name="isRoot">Flag to avoid stopping on root node, which is an outlet or reservoir</param>
+            <param name="sindx">Row index.</param>
+            <param name="dsNodeFieldNum">Column of the node.</param>
+            <param name="us1FieldNum">Column of the left.</param>
+            <param name="us2FieldNum">Column of the right.</param>
+            <returns>The created binary tree.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.GetDsNodeType(DotSpatial.Data.IFeatureSet,System.Int32)">
+            <summary>
+            Get type of inlet/outlet for MWSHAPEID equal to ID in outlets shapefile.
+            </summary>
+            <param name="outlets">Featureset with the outlets.</param>
+            <param name="id">Id of the outlet whose type should be returned.</param>
+            <returns>0 for outlet, 1 for inlet, 2 for reservoir, 3 for point source</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.MergeBasinsByDrainage(DotSpatial.Data.IFeatureSet,DotSpatial.Plugins.Taudem.Hydrology.BinTree)">
+            <summary>
+            Merge basins.
+            </summary>
+            <param name="shed">Featureset whose elements should be merged.</param>
+            <param name="drainage">Tree used for merging.</param>
+            <returns>The merge result.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.MergeBasinsByDrainageI(DotSpatial.Data.Shapefile,DotSpatial.Plugins.Taudem.Hydrology.BinTree)">
+            <summary>
+            Merge basins using IGeometry, and only converting each shape once.
+            </summary>
+            <param name="shed">Shapefile whose elements should be merged.</param>
+            <param name="drainage">Tree used for merging.</param>
+            <returns>The resulting geometry.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.ReverseShape(DotSpatial.Data.IFeature)">
+            <summary>
+            Reverses a single part shape. Shape must be already checked to have only one part.
+            </summary>
+            <param name="shape">Shape that gets reversed.</param>
+            <returns>The reversed shape.</returns>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.Hydrology.BinTree">
+            <summary>
+            Binary (integer) trees
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.BinTree.#ctor(System.Int32,DotSpatial.Plugins.Taudem.Hydrology.BinTree,DotSpatial.Plugins.Taudem.Hydrology.BinTree)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.Taudem.Hydrology.BinTree"/> class.
+            Constructor
+            </summary>
+            <param name="v">node value</param>
+            <param name="l">left subtree</param>
+            <param name="r">right subtree</param>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.Hydrology.BinTree.Left">
+            <summary>
+            Gets or sets the left subtree.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.Hydrology.BinTree.Right">
+            <summary>
+            Gets or sets the right subtree.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.Hydrology.BinTree.Val">
+            <summary>
+            Gets or sets the node value.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Hydrology.BinTree.ToString">
+            <summary>
+            Make a string correponding to (reverse) depth-first traverse.
+            </summary>
+            <returns>A string correponding to (reverse) depth-first traverse.</returns>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.MessageStrings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.ApplicationError">
+            <summary>
+              Looks up a localized string similar to Application Error.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.AutomaticWatershedDilineationEncounteredError">
+            <summary>
+              Looks up a localized string similar to Automatic Watershed Delineation encountered an error which generally occurs from too many outlets/inlets being delineated, especially ones close together. Please lower the snap threshold and rerun to minimize outlets/inlets not direclty on the streams..
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.ErrorInOpening">
+            <summary>
+              Looks up a localized string similar to Error in opening {0}.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.FileDoesNotExists">
+            <summary>
+              Looks up a localized string similar to The file {0} does not exists!.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Taudem.MessageStrings.TaudemError">
+            <summary>
+              Looks up a localized string similar to TauDEM Error {0}.
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.TaudemHelpers">
+            <summary>
+            Used to support legacy style code. These are intended to be removed when the extension is redesigned.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.TaudemHelpers.EditCellValue(DotSpatial.Data.IFeatureSet,System.Int32,System.Int32,System.Object)">
+            <summary>
+            Updates the cell value.
+            </summary>
+            <param name="file">Featureset whose cell should be updated.</param>
+            <param name="col">Column of the cell.</param>
+            <param name="row">Row of the cell.</param>
+            <param name="newValue">Value that should be set.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.TaudemHelpers.GetCellValue(DotSpatial.Data.IFeatureSet,System.Int32,System.Int32)">
+            <summary>
+            Gets the cell value.
+            </summary>
+            <param name="file">Featureset that contains the cell value.</param>
+            <param name="col">Column of the cell.</param>
+            <param name="row">Row of the cell.</param>
+            <returns>The cell value.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.TaudemHelpers.GetShape(DotSpatial.Data.IFeatureSet,System.Int32)">
+            <summary>
+            Gets the feature with the given index.
+            </summary>
+            <param name="file">Featureset to the get feature from.</param>
+            <param name="index">Index of the feature.</param>
+            <returns>The feature belonging to the index.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.TaudemHelpers.GetFileName(System.Object)">
+            <summary>
+            Gets the file name of the given dataset.
+            </summary>
+            <param name="dataset">Dataset to get the file name for.</param>
+            <returns>The file name of the dataset.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.TaudemHelpers.GetMaximum(DotSpatial.Data.IRaster)">
+            <summary>
+            Gets the maximum value from the given raster.
+            </summary>
+            <param name="raster">Raster to get the maximum value from.</param>
+            <returns>The maximum value.</returns>
+        </member>
+        <member name="T:DotSpatial.Plugins.Taudem.Utils">
+             <summary>
+             Utils provides a collection of methods ranging from file conversion to finding a point on a shape.
+             </summary>
+            
+        </member>
+        <member name="M:DotSpatial.Plugins.Taudem.Utils.AreaOfPart(DotSpatial.Data.IFeature,System.Int32)">
+            <summary>
+            Calculates the area of a part, without taking into consideration any other aspects of the polygon.
+            </summary>
+            <param name="polygon">A MapWinGIS.Shape POLYGON, POLYGONZ, or POLYGONM</param>
+            <param name="partIndex">The integer index of the part to obtain the area of.
+            This value will be ignored if the shape only has one part, and the function
+            will calculate the area of the entire shape.</param>
+            <returns>A double value that is equal to the area of the part.</returns>
+            <remarks>Coded by Ted Dunsford 6/23/2006, derived from Angela's Area algorithm
+            Code reference http://astronomy.swin.edu.au/~pbourke/geometry/polyarea/
+            Cached in MapWinGeoProc\clsUtils\Documentation\
+            I don't think that we ever want to return a negative area from this function, even if the part is a hole, because it is being calculated outside of the
+            context of any other parts.  Only the collective Area function should worry about ascribing a sign value to the individual part areas.
+            </remarks>
+        </member>
+    </members>
+</doc>

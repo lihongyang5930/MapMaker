@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.FindFeature</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.FindFeature.FindFeaturePlugin">
+            <summary>
+            Allows a user to select polygons that match a query.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.FindFeature.FindFeaturePlugin.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.FindFeature.FindFeaturePlugin.Deactivate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.FindFeature.FindFeaturePlugin.FindToolClick(System.Object,System.EventArgs)">
+            <summary>
+            Find a feature by query expression.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.FindFeature.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.FindFeature.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.FindFeature.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.FindFeature.Properties.Resources.IncorrectSyntax">
+            <summary>
+              Looks up a localized string similar to The syntax of that query isn&apos;t quite right: {0}.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.FindFeature.Properties.Resources.page_white_find">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.FindFeature.Properties.Resources.page_white_find_16x16">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.FindFeature.Properties.Resources.PleaseSelectAFeatureLayer">
+            <summary>
+              Looks up a localized string similar to Please select a feature layer..
+            </summary>
+        </member>
+    </members>
+</doc>

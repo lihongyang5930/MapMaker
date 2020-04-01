@@ -1,0 +1,80 @@
+-----지방-----
+
+=분석Analysis=
+구역분할 ?????
+
+수리Repair
+LeakageView : [수리분석] - 누수량 분석
+DemandPatternView : [수리분석] - 수요패턴정의
+RoughnessCoefficientView : [수리분석] - 조도계수 보정
+
+수질(Water)Quality
+ResidualChlorineView : [수질분석] - 잔류염소 감쇠능
+
+관망(Pipe)Network
+NonLeakageView : [관망해석] - 누수량을 미고려한 수리모의
+RuptureLeakageView : [관망해석] - 파열/배경 누수량 분석을 통한 수리모의
+Rupture => Breakage
+BreakageLeakageView
+PressureLeakageCoefficientView : [관망해석] - 수압&누수계수를 고려한 수리모의
+
+=진단Diagnosis=
+
+수리 Repair(X) => Hydraulics(O)
+QuantityView		: [수리진단] - 수량진단
+HydraulicView		: [수리진단] - 수압진단
+VelocityView		: [수리진단] - 유속진단
+KPressureView		: [수리진단] - K-Pressure
+
+KPressure			: [수리진단] - K-Pressure
+
+수질(Water)Quality
+BasePurificationPlantView	: [수질진단] - [기초진단] - 정수장
+BasePipeView				: [수질진단] -[기초진단] - 관로
+GeneralDataInputView		: [수질진단] -[일반진단] - 조사자료 입력
+GeneralInfringementView		: [수질진단] -[일반진단] - 수질기준위반 평가
+GeneralSafeView				: [수질진단] -[일반진단] - 수질안전성 평가
+GeneralVolatilityView		: [수질진단] - [일반진단] - 수질변동성 평가
+?							: [수질예측] - 관벽반응계수 보정
+
+시설Facility
+IndirectScoreView			: [시설진단] - [관 상태 간접 평가] - 점수 평가법
+IndirectPhysicalView		: [시설진단] - [관 상태 간접 평가] - 물리적 모델
+IndirectProfitAndLossView	: [시설진단] - [관 상태 간접 평가] - 손익분기분석
+
+DirectSelectedView			: [시설진단] - [관 상태 직접 평가] - 대상관로 선정
+DirectSiteDataInputView		: [시설진단] - [관 상태 직접 평가] - 현장조사자료 입력
+DirectPrecisionView			: [시설진단] - [관 상태 직접 평가] - 정밀진단
+
+종합의사결정GeneralDecisionMaking
+ZoneImprovementView			: [종합의사결정] - 면적(구역) 개량 우선순위
+SectionImprovementView		: [종합의사결정] - 선적(구간) 개량 우선순위
+
+
+
+
+-----광역-----
+=분석Analysis=
+구역분할 ????? (지방과 다름)
+관망해석 ????? (지방과 다름)
+
+=진단Diagnosis=
+수리Repair
+[현장계측] SiteMeasurement
+MeasurementZoneView : [수리진단] - [현장계측] - 계측구역선정
+MeasurementPointView : [수리진단] - [현장계측] - 계측지점선정
+MeasurementDataInputView : [수리진단]- [현장계측] - 계측자료 입력
+FlowRateManagementView : [수리진단]- [현장계측] - 유속계수 구간 관리
+
+[수리적 거동분석] MathematicalBehavior
+TimeSeriesView : [수리진단] - [수리적 거동분석] - 시계열 분석
+HydraulicGradientMeasurementView : [수리진단] - [수리적 거동분석] - 동수경사분석(계측구역)
+HydraulicGradientOptionView : [수리진단] - [수리적 거동분석] - 동수경사분석(임의구역)
+FlowVariabilityView : [수리진단] - [수리적 거동분석] - 유량 변동성 분석
+FlowRateCalculationGAView : [수리진단] - [수리적 거동분석] - 유속계수 산정(GA)
+FlowRateCalculationView : [수리진단] - [수리적 거동분석] - 유속계수 산정
+
+SupplyableAmountView : [수리진단] - [용수공급 능력검토] - 공급가능량 검토
+
+수질진단 - 지방 동일(이름만 봐서는 내용은 모름)
+시설진단 - 지방 동일(이름만 봐서는 내용은 모름)

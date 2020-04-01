@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.Help</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.Help.HelpPlugin">
+            <summary>
+            Plugin that adds a help button.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.Help.HelpPlugin.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.Help.HelpPlugin.Deactivate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.Help.HelpPlugin.ButtonClick(System.Object,System.EventArgs)">
+            <summary>
+            Opens the url of the documentation page.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.Help.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Help.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Help.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Help.Properties.Resources.help">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.Help.Properties.Resources.help_16x16">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>

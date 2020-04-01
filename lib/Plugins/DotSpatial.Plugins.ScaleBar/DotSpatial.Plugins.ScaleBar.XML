@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.ScaleBar</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin">
+            <summary>
+            The scale bar can be used to scale the map.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin"/> class.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.Activate">
+            <summary>
+            Initialize the DotSpatial plugin
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.Deactivate">
+            <summary>
+            Fires when the plugin should become inactive
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.MetersFromDecimalDegreesPoints(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Uses spherical approximation method to return distance in meters between two decimal degree points.
+            </summary>
+            <param name="dDegX1">The first x.</param>
+            <param name="dDegY1">The first y.</param>
+            <param name="dDegX2">The second x.</param>
+            <param name="dDegY2">The second y.</param>
+            <returns>The resulting distance.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.AddHandler">
+            <summary>
+            Add the needed EventHandlers to the Map.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.ComboKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Handles the input of user defined scales.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.ComputeMapScale">
+            <summary>
+            Gets the scale of the Maps ViewExtents.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.LayerAdded(System.Object,DotSpatial.Symbology.LayerEventArgs)">
+            <summary>
+            Correct MapScale after layers got added.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.MapFrameExtentsChanged(System.Object,DotSpatial.Data.ExtentArgs)">
+            <summary>
+            Show the new MapScale in Combobox when the MapFrameExtent was changed.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.RemoveHandler">
+            <summary>
+            Remove the used EventHandlers from the Map.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.ScaleTo(System.Double)">
+            <summary>
+            Resize the Map to the given scale.
+            </summary>
+            <param name="scale">The new scale</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.ScaleToSelected(System.Object,DotSpatial.Controls.Header.SelectedValueChangedEventArgs)">
+            <summary>
+            Resize the Map according to the selected scale.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.ScaleBar.ScaleBarPlugin.SerializationManagerDeserializing(System.Object,DotSpatial.Controls.SerializingEventArgs)">
+            <summary>
+            Add EventHandlers to Map when a new project gets created or an old project gets opened.
+            </summary>
+            <param name="sender">Sender that raised the event.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.ScaleBar.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.ScaleBar.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.ScaleBar.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.ScaleBar.Properties.Resources.Custom">
+            <summary>
+              Looks up a localized string similar to Custom.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.ScaleBar.Properties.Resources.Panel_Name">
+            <summary>
+              Looks up a localized string similar to Zoom.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.ScaleBar.Properties.Resources.ScaleBar_Box_Text">
+            <summary>
+              Looks up a localized string similar to Select a scale or enter a scale and press enter to change the scale of the map..
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.ScaleBar.Properties.Resources.ScaleBar_Box_ToolTip">
+            <summary>
+              Looks up a localized string similar to Change mapscale..
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotSpatial.Plugins.MapWindowProjectFileCompatibility</name>
+    </assembly>
+    <members>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ArchiveSerializer">
+            <summary>
+            Used to Package a project into a zip file.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ArchiveSerializer.Save(System.String,System.String)">
+            <summary>
+            Saves the specified xml and referenced layers into a zip file.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <param name="xml">The Project XML.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ArchiveSerializer.GetRelatedFiles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets the related metadata files (e.g., includes shx and dbf when given a shp file).
+            </summary>
+            <param name="files">The files.</param>
+            <returns>The related metadata files (e.g., includes shx and dbf when given a shp file).</returns>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLExtensions">
+            <summary>
+            Helper extensions that are used to parse an xml file and display its schema.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLExtensions.GetXPath(System.Xml.Linq.XObject)">
+            <summary>
+            Gets the X path.
+            </summary>
+            <param name="xobj">The xobj.</param>
+            <returns>The x Path.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLExtensions.StrCat``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            STRs the cat.
+            </summary>
+            <typeparam name="T">Type of the elements in source.</typeparam>
+            <param name="source">The source.</param>
+            <param name="separator">The separator.</param>
+            <returns>The produced string.</returns>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode">
+            <summary>
+            http://mutable.net/blog/archive/2010/07/07/yet-another-take-on-a-dynamicobject-wrapper-for-xml.aspx
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode"/> class.
+            </summary>
+            <param name="node">The node.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode"/> class.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.String)">
+            <summary>
+            Loads the specified URI.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.IO.Stream)">
+            <summary>
+            Loads the specified stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.IO.TextReader)">
+            <summary>
+            Loads the specified text reader.
+            </summary>
+            <param name="textReader">The text reader.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.Xml.XmlReader)">
+            <summary>
+            Loads the specified reader.
+            </summary>
+            <param name="reader">The reader.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.IO.Stream,System.Xml.Linq.LoadOptions)">
+            <summary>
+            Loads the specified stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="options">The options.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.String,System.Xml.Linq.LoadOptions)">
+            <summary>
+            Loads the specified URI.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="options">The options.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.IO.TextReader,System.Xml.Linq.LoadOptions)">
+            <summary>
+            Loads the specified text reader.
+            </summary>
+            <param name="textReader">The text reader.</param>
+            <param name="options">The options.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Load(System.Xml.XmlReader,System.Xml.Linq.LoadOptions)">
+            <summary>
+            Loads the specified reader.
+            </summary>
+            <param name="reader">The reader.</param>
+            <param name="options">The options.</param>
+            <returns>The resulting DynamicXMLNode</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Parse(System.String)">
+            <summary>
+            Parses the specified text.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The parse result.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.Parse(System.String,System.Xml.Linq.LoadOptions)">
+            <summary>
+            Parses the specified text.
+            </summary>
+            <param name="text">The text.</param>
+            <param name="options">The options.</param>
+            <returns>The parse result.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.TryConvert(System.Dynamic.ConvertBinder,System.Object@)">
+            <summary>
+            Provides implementation for type conversion operations. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations that convert an object from one type to another.
+            </summary>
+            <param name="binder">Provides information about the conversion operation. The binder.Type property provides the type to which the object must be converted. For example, for the statement (String)sampleObject in C# (CType(sampleObject, Type) in Visual Basic), where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Type returns the <see cref="T:System.String"/> type. The binder.Explicit property provides information about the kind of conversion that occurs. It returns true for explicit conversion and false for implicit conversion.</param>
+            <param name="result">The result of the type conversion operation.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)">
+            <summary>
+            Provides the implementation for operations that get a value by index. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for indexing operations.
+            </summary>
+            <param name="binder">Provides information about the operation.</param>
+            <param name="indexes">The indexes that are used in the operation. </param>
+            <param name="result">The result of the index operation.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Provides the implementation for operations that get member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations such as getting a value for a property.
+            </summary>
+            <param name="binder">Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the Console.WriteLine(sampleObject.SampleProperty) statement, where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
+            <param name="result">The result of the get operation. For example, if the method is called for a property, you can assign the property value to <paramref name="result"/>.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)">
+            <summary>
+            Provides the implementation for operations that invoke a member. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations such as calling a method.
+            </summary>
+            <param name="binder">Provides information about the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleMethod". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
+            <param name="args">The arguments that are passed to the object member during the invoke operation. </param>
+            <param name="result">The result of the member invocation.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)">
+            <summary>
+            Provides the implementation for operations that set a value by index. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations that access objects by a specified index.
+            </summary>
+            <param name="binder">Provides information about the operation.</param>
+            <param name="indexes">The indexes that are used in the operation.</param>
+            <param name="value">The value to set to the object that has the specified index. For example, for the sampleObject[3] = 10 operation in C# (sampleObject(3) = 10 in Visual Basic), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, <paramref name="value"/> is equal to 10.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.
+            </returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.DynamicXMLNode.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)">
+            <summary>
+            Provides the implementation for operations that set member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations such as setting a value for a property.
+            </summary>
+            <param name="binder">Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member to which the value is being assigned. For example, for the statement sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
+            <param name="value">The value to set to the member. For example, for sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, the <paramref name="value"/> is "Test".</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyArchiveDeserializer">
+            <summary>
+            Open MW4 .wma archive file.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyArchiveDeserializer.#ctor(DotSpatial.Controls.AppManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyArchiveDeserializer"/> class.
+            </summary>
+            <param name="applicationManager">The _application manager.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyArchiveDeserializer.OpenFile(System.String)">
+            <summary>
+            Opens the MW4 style project file.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyDeserializer">
+            <summary>
+            LegacyDeserializer
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyDeserializer.GetColor(System.Object)">
+            <summary>
+            Gets the color from a MW settings string.
+            </summary>
+            <param name="colorFromMw">The color from MW.</param>
+            <returns>The converted color.</returns>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyDeserializer.DeserializeLayer(System.Object,DotSpatial.Controls.MapPolygonLayer)">
+            <summary>
+            Deserializes the layer.
+            </summary>
+            <param name="layer">The layer.</param>
+            <param name="polyLayer">The poly layer.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyDeserializer.DeserializeLayer(System.Object,DotSpatial.Controls.MapLineLayer)">
+            <summary>
+            Deserializes the layer.
+            </summary>
+            <param name="layer">The layer.</param>
+            <param name="lineLayer">The line layer.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyDeserializer.DeserializeLayer(System.Object,DotSpatial.Controls.MapPointLayer)">
+            <summary>
+            Deserializes the layer.
+            </summary>
+            <param name="layer">The layer.</param>
+            <param name="pointLayer">The point layer.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyDeserializer.DeserializeLayerProperties(System.Object,DotSpatial.Symbology.Layer)">
+            <summary>
+            Deserializes the layer properties.
+            </summary>
+            <param name="layer">The layer.</param>
+            <param name="mapLayer">The map layer.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyHJustification">
+            <summary>
+            LegacyHJustification
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyHJustification.Center">
+            <summary>
+            The item is centered
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyHJustification.Left">
+            <summary>
+            The item is justified to the left
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyHJustification.Right">
+            <summary>
+            The item is justified to the right
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyHJustification.None">
+            <summary>
+            No Justification
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyHJustification.Raw">
+            <summary>
+            Raw
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerDeserializer">
+            <summary>
+            Used to support lbl files.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerDeserializer.Open(System.String,DotSpatial.Controls.IMap,DotSpatial.Symbology.Layer)">
+            <summary>
+            Opens the specified file name.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <param name="map">The map.</param>
+            <param name="layer">The layer.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerDeserializer.TryDeserialization(DotSpatial.Symbology.ILayer,DotSpatial.Controls.IMap)">
+            <summary>
+            Opens the specified layer.
+            </summary>
+            <param name="layer">The layer.</param>
+            <param name="map">The map.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType">
+            <summary>
+            LayerType
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType.Grid">
+            <summary>
+            Raster Layer
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType.Image">
+            <summary>
+            Image Layer
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType.Invalid">
+            <summary>
+            Not a valid layer format
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType.LineShapefile">
+            <summary>
+            Line FeatureSet Layer
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType.PointShapefile">
+            <summary>
+            Point FeatureSet Layer
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyLayerType.PolygonShapefile">
+            <summary>
+            Polygon FeatureSet Layer
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType">
+            <summary>
+            PointTypes
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.Circle">
+            <summary>
+            Circular points
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.Diamond">
+            <summary>
+            Diamond
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.FontChar">
+            <summary>
+            FontChar
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.ImageList">
+            <summary>
+            ImageList
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.Square">
+            <summary>
+            Square
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.TriangleDown">
+            <summary>
+            Triangle pointed down
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.TriangleLeft">
+            <summary>
+            Triangle pointed left
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.TriangleRight">
+            <summary>
+            Triangle pointed right
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.TriangleUp">
+            <summary>
+            Triangle pointed up
+            </summary>
+        </member>
+        <member name="F:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyPointType.UserDefined">
+            <summary>
+            User defined
+            </summary>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyProjectDeserializer">
+            <summary>
+            Used to Deserialize mwprj files from MapWindow 4 and earlier.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyProjectDeserializer.#ctor(DotSpatial.Controls.IMap)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyProjectDeserializer"/> class.
+            </summary>
+            <param name="map">The map.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.LegacyProjectDeserializer.OpenFile(System.String)">
+            <summary>
+            Opens the MW4 style project file.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwa">
+            <summary>
+            This provider can be used to open MapWindow 4 Project Archives.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwa.App">
+            <summary>
+            Gets or sets the AppManager that is responsible for activating and deactivating plugins as well as coordinating
+            all of the other properties.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwa.Extension">
+            <inheritdoc/>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwa.FileTypeDescription">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwa.Open(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwprj">
+            <summary>
+            This provider can be used to open MapWindow 4 Projects.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwprj.App">
+            <summary>
+            Gets or sets the AppManager that is responsible for activating and deactivating plugins as well as coordinating
+            all of the other properties.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwprj.Extension">
+            <inheritdoc/>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwprj.FileTypeDescription">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectMwprj.Open(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectZip">
+            <summary>
+            This provider can be used to open zipped projects.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectZip.App">
+            <summary>
+            Gets or sets the AppManager that is responsible for activating and deactivating plugins as well as coordinating
+            all of the other properties.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectZip.Extension">
+            <inheritdoc/>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectZip.FileTypeDescription">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.OpenProjectZip.Open(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer1Deserializer">
+            <summary>
+            Deserializer for version 1 project files.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer1Deserializer.#ctor(DotSpatial.Controls.IMap)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer1Deserializer"/> class.
+            </summary>
+            <param name="map">The map.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer1Deserializer.Deserialize(System.Object)">
+            <summary>
+            Deserializes beginning from the given root.
+            </summary>
+            <param name="xmlRoot">Root to use as string point.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer2Deserializer">
+            <summary>
+            Deserializer for version 2 project files.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer2Deserializer.#ctor(DotSpatial.Controls.IMap)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer2Deserializer"/> class.
+            </summary>
+            <param name="map">The map.</param>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.ProjectFileVer2Deserializer.Deserialize(System.Object)">
+            <summary>
+            Deserializes beginning from the given root.
+            </summary>
+            <param name="xmlRoot">Root to use as string point.</param>
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.RetrieveLegacySymbolizationPlugin">
+            <summary>
+            Plugin that allows to retrieve legacy symbolization.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.RetrieveLegacySymbolizationPlugin.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.RetrieveLegacySymbolizationPlugin.Deactivate">
+            <inheritdoc />
+        </member>
+        <member name="T:DotSpatial.Plugins.MapWindowProjectFileCompatibility.SaveProjectAsZip">
+            <summary>
+            Saves the project as zip file.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.SaveProjectAsZip.Extension">
+            <summary>
+            Gets the extension.
+            </summary>
+        </member>
+        <member name="P:DotSpatial.Plugins.MapWindowProjectFileCompatibility.SaveProjectAsZip.FileTypeDescription">
+            <summary>
+            Gets the file type description.
+            </summary>
+        </member>
+        <member name="M:DotSpatial.Plugins.MapWindowProjectFileCompatibility.SaveProjectAsZip.Save(System.String,System.String)">
+            <summary>
+            Saves the graph to a file with the given file name.
+            </summary>
+            <param name="fileName">Filename of the resulting file.</param>
+            <param name="graph">Graph that gets saved.</param>
+        </member>
+    </members>
+</doc>

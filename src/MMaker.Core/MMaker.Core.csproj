@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="..\..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ABC1246D-50D5-4CD7-AAF8-6923F4F75A15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MMaker.Core</RootNamespace>
+    <AssemblyName>MMaker.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotSpatial.Analysis">
+      <HintPath>..\..\lib\DotSpatial.Analysis.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Compatibility">
+      <HintPath>..\..\lib\DotSpatial.Compatibility.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Controls">
+      <HintPath>..\..\lib\DotSpatial.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Data">
+      <HintPath>..\..\lib\DotSpatial.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Data.Forms">
+      <HintPath>..\..\lib\DotSpatial.Data.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Extensions">
+      <HintPath>..\..\lib\DotSpatial.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.GeoAPI">
+      <HintPath>..\..\lib\DotSpatial.GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Modeling.Forms">
+      <HintPath>..\..\lib\DotSpatial.Modeling.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.NetTopologySuite">
+      <HintPath>..\..\lib\DotSpatial.NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.NTSExtension">
+      <HintPath>..\..\lib\DotSpatial.NTSExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Positioning">
+      <HintPath>..\..\lib\DotSpatial.Positioning.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Positioning.Design">
+      <HintPath>..\..\lib\DotSpatial.Positioning.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Positioning.Forms">
+      <HintPath>..\..\lib\DotSpatial.Positioning.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Projections">
+      <HintPath>..\..\lib\DotSpatial.Projections.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Projections.Forms">
+      <HintPath>..\..\lib\DotSpatial.Projections.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Serialization">
+      <HintPath>..\..\lib\DotSpatial.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Symbology">
+      <HintPath>..\..\lib\DotSpatial.Symbology.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Symbology.Forms">
+      <HintPath>..\..\lib\DotSpatial.Symbology.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Firebird, Version=7.5.0.0, Culture=neutral, PublicKeyToken=42d22d092898e5f8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.Firebird.7.5.0\lib\net452\EntityFramework.Firebird.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.5.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FirebirdSql.Data.FirebirdClient.7.5.0\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grid.Base, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Grid.Windows, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Shared.Base, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Shared.Windows, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SpellChecker.Base, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Tools.Base, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Tools.Windows, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppEnvironment.cs" />
+    <Compile Include="AppStatic.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="DataBase\SqLiteService.cs" />
+    <Compile Include="Dpf\DpfService.cs" />
+    <Compile Include="Dpf\FirebirdConfiguration.cs" />
+    <Compile Include="Enums\AppCommand.cs" />
+    <Compile Include="Helper\RibbonManager.cs" />
+    <Compile Include="IShell.cs" />
+    <Compile Include="Models\LayerEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BaseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\BaseView.Designer.cs">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="firebird\aliases.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="firebird\firebird.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="firebird\firebird.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="firebird\intl\fbintl.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="firebird\Microsoft.VC80.CRT.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\BaseView.resx">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_DB진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_EPANET2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_INP병합.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_INP생성.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_INP좌표변환.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_검색.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_계량기사용량검색.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_관망도편집.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_관망해석.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_관하여.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_광역상수레이어코드표.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_구역분할.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_그리드생성.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_내보내기.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_누수실행1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_다른이름으로저장.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_닥터파이프저장.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_맵메이커.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_면적우선개량순위.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_사용량분배관계도.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_새작업.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_선적우선개량순위.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_선택.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_수리분석.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_수리진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_수요패턴요구.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_수질분석.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_수질진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_시설진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_실행.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_열기.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_옵션.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_이동.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_자료조인.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_저장.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_종료.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_좌표변환.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_지도열기.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_지역상수레이어코드표.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_찾기.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_테이블.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_필드매핑코드표.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_화면맞춤.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_확대축소.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_환경부고시안평가.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Epanet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Epanet_run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_attribute_show.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_clear_selection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_crs_change.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_element_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_identify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_label_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_create.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_database_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_db_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_raster_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_vector_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_layer_vector_thematic_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_measure_area.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_measure_distance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_new_map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_pan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_pan1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_project_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_quit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_save_as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_save1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_select_by_polygon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_snapshot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_vertex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_zoom_in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_zoom_max_extents.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_zoom_to_layer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_zoom_to_selection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_book24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_broken_robot.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_compass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_component32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_coordinates32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_default24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_docs24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_error_orange32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_error_red32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_eye32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_folder_open32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_geometry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_globe32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_layers32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_map32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_mapwindow_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_mapwindow24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_measure_length.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_measure32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_open_layer32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_options.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_palette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_paypal24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_picture32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_plugin32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_raster.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_scale24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_server32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_test24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_tiles32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_toolbox16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_toolbox24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_tools32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_tune32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_vector32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_vector32_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_warning64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_widgets32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_wms_add24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_world_grid32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_zoom_next24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_zoom_prev24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\INP병합.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\INP생성.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mapwindow_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\관망해석.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\구역분할.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\새프로젝트.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\수리분석.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\수리진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\수질분석.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\수질진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\시설진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\열기.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\자료조인.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\저장.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\종합의사결정.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\진단.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="firebird\fbclient.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\fbembed.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\gbak.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\ib_util.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\icudt30.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\icuin30.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\icuuc30.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\IDPLicense.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\intl\fbintl.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\IPLicense.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\msvcp80.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\msvcr80.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\udf\fbudf.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\udf\fbudf.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\udf\fbudf.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\udf\ib_udf.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\udf\ib_udf.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="firebird\udf\ib_udf2.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MindOne.Core\MindOne.Core.csproj">
+      <Project>{dc4f8b8a-59d4-4f89-a7f4-acceb89edd8d}</Project>
+      <Name>MindOne.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMaker.Geographics\MMaker.Geographics.csproj">
+      <Project>{3a0ad1ba-5e07-433f-9365-2093f2f80248}</Project>
+      <Name>MMaker.Geographics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
+    <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

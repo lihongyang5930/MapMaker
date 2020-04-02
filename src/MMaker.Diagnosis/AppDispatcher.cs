@@ -67,11 +67,11 @@ namespace MMaker.Diagnosis
         /// <returns></returns>
         private bool HandleGenerator(AppCommand command)
         {
-            if (!Map.Layers.Any())
-            {
-                MessageHelper.Info("레이어 불러오기를 실행하십시오.");
-                return false;
-            }
+            //if (!Map.Layers.Any())
+            //{
+            //    MessageHelper.Info("레이어 불러오기를 실행하십시오.");
+            //    return false;
+            //}
 
             switch (command)
             {

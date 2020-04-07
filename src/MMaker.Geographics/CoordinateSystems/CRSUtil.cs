@@ -11,19 +11,15 @@ namespace MMaker.Geographics.CoordinateSystems
         const string _regexPattern  = @"(?<=[Ee][Pp][Ss][Gg][:\.\d]+)\d{4}"; // ex) urn:ogc:def:crs:EPSG:6.18.3:3857 => 3857
         static Dictionary<int, ProjectionInfo> _cache;
 
-        //public static void Load(string directoryName)
-        //{
-        //    var coords = Web.EpsgWebService.LoadLocal(directoryName);
-        //    _cache = coords.ToDictionary(x => x.Code, x => x);
-        //}
-
         static CRSUtil()
         {
-            _cache = new Dictionary<int, ProjectionInfo>();
-            _cache.Add(2096, ProjectionInfo.FromProj4String(_2096));
-            _cache.Add(4326, ProjectionInfo.FromProj4String(_4326));
-            _cache.Add(3857, ProjectionInfo.FromProj4String(_3857));
-            _cache.Add(5181, ProjectionInfo.FromProj4String(_5181));
+            _cache = new Dictionary<int, ProjectionInfo>
+            {
+                { 2096, ProjectionInfo.FromProj4String(_2096) },
+                { 4326, ProjectionInfo.FromProj4String(_4326) },
+                { 3857, ProjectionInfo.FromProj4String(_3857) },
+                { 5181, ProjectionInfo.FromProj4String(_5181) }
+            };
         }
 
         public static ProjectionInfo EPSG4326 => Get("EPSG:4326");
@@ -84,29 +80,6 @@ namespace MMaker.Geographics.CoordinateSystems
             }
             return null;
         }
-
-        //public static LatLon ToLatLon(string crs, double x, double y)
-        //{
-        //    return ToLatLon(crs, new Coordinate(x, y));
-        //}
-        //public static LatLon ToLatLon(string crs, Coordinate coordinate)
-        //{
-        //    var from        = Get(crs);
-        //    var to          = EPSG4326;
-        //    var transformed = Transform(from, to, coordinate);
-        //    return new LatLon(transformed);
-        //}
-        ////public static Coordinate FromLatLon(string crs, GeoAngle latitude, GeoAngle longitude)
-        ////{
-        ////   return FromLatLon(crs, new LatLon(latitude, longitude));
-        ////}
-        //public static Coordinate FromLatLon(string crs, LatLon latLon)
-        //{
-        //    var from        = EPSG4326;
-        //    var to          = Get(crs);
-        //    var transformed = Transform(from, to, latLon.ToCoordinate());
-        //    return transformed;
-        //}
 
         public static Coordinate Transform(ProjectionInfo from, ProjectionInfo to, Coordinate coordinate)
         {

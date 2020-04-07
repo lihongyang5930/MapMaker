@@ -17,6 +17,8 @@ namespace MMaker.Diagnosis.Controllers
     {
         private readonly AppDispatcher _dispatcher = new AppDispatcher();
 
+        private BackgroundLayerSet layerSet;
+
         public DiagnosisController(IShell shell) : base()
         {
             this.MmakerShell = shell;
@@ -27,8 +29,6 @@ namespace MMaker.Diagnosis.Controllers
             MapHelper.MmakerShell = this.MmakerShell;
         }
 
-        private BackgroundLayerSet layerSet;
-
         public override async Task Initialize()
         {
             MmakerShell.RibbonManager.InitializeMenu();
@@ -37,32 +37,26 @@ namespace MMaker.Diagnosis.Controllers
                 foreach (var Ex in tab.Panel.Controls.Cast<ToolStripEx>())
                     _dispatcher.InitMenu(Ex.Items);
 
-            MMaker.Core.AppStatic.ReSetLayers();
-
+            // generate background layer (using kakaomap)
             var backgroundLayerFactory = new BackgroundLayerFactory();
             layerSet = await backgroundLayerFactory.GetKakaoMap();
 
             InitializeViews();
+
+            // make 18 standards WTL layers
+            MMaker.Core.AppStatic.ReSetLayers();
         }
 
         private void InitializeViews()
         {
             MmakerShell.LegendView = new Geographics.Controls.LegendView() { Visible = false };
             MmakerShell.MapView = new Geographics.Controls.MapView() { Visible = false };
-            //MmakerShell.AppManager.Legend = AppManager.Legend as Legend;
-            //MmakerShell.AppManager.Map = AppManager.Map as Map;
 
-            //MmakerShell.AppManager.Map.Legend = MmakerShell.AppManager.Legend;
-
-            //MmakerShell.DockManager.ShowDocument(MmakerShell.MapView, "지도", false);
-            //MmakerShell.DockManager.InitializeDockLeft(MmakerShell.LegendView, "범례");
-            //MmakerShell.DockManager.SetDockVisible(MmakerShell.LegendView, true);
-
-            //BackgroundLayer backlayer = layerSet.Layers.ElementAt(0);
-            //backlayer.LegendText = "배경지도";
-            //backlayer.IsVisible = true;
-
-            //MmakerShell.AppManager.Map.Layers.Add(backlayer);
+            // [20200406] fdragons
+            // make background layer (using kakaomap)
+            BackgroundLayer backlayer = layerSet.Layers.ElementAt(0); // 0:map_2d, 1:map_skyview, 2:map_hybrid
+            backlayer.IsVisible = true;
+            MmakerShell.AppManager.Map.Layers.Add(backlayer);
         }
 
         internal AppDispatcher Dispatcher

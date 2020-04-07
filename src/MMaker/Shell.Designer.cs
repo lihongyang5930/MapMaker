@@ -187,7 +187,6 @@
             this.ribbonControlAdv1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockingManager)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -198,7 +197,8 @@
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem rbMap;
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem rbGenerator;
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem rbTool;
-        public DotSpatial.Controls.AppManager appManager;
+
+        private DotSpatial.Controls.AppManager appManager;
     }
 }
 

@@ -758,12 +758,6 @@
             Fires when the plugin should become inactive
             </summary>
         </member>
-        <member name="M:DotSpatial.Plugins.WebMap.WebMapPlugin.AddOpaticyDropDown(DotSpatial.Controls.Header.IHeaderControl)">
-            <summary>
-            [20200402] fdragons - opacity range set
-            </summary>
-            <param name="header"></param>
-        </member>
         <member name="M:DotSpatial.Plugins.WebMap.WebMapPlugin.ChangeBasemapOpacity">
             <summary>
             Changes the opacity of the current basemap image and invalidates the map.

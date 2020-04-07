@@ -35,10 +35,10 @@ namespace DotSpatial.Plugins.ShapeEditor
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvLayer = new System.Windows.Forms.DataGridView();
-            this.cbPerformSnap = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.dgvcSnappable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgvcLayerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbPerformSnap = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,9 +46,9 @@ namespace DotSpatial.Plugins.ShapeEditor
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSave.Location = new System.Drawing.Point(197, 509);
+            this.btnSave.Location = new System.Drawing.Point(210, 332);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(87, 21);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@ namespace DotSpatial.Plugins.ShapeEditor
             this.dgvcLayerName});
             this.dgvLayer.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvLayer.GridColor = System.Drawing.Color.White;
-            this.dgvLayer.Location = new System.Drawing.Point(8, 59);
+            this.dgvLayer.Location = new System.Drawing.Point(9, 54);
             this.dgvLayer.MultiSelect = false;
             this.dgvLayer.Name = "dgvLayer";
             this.dgvLayer.ReadOnly = true;
@@ -89,30 +89,9 @@ namespace DotSpatial.Plugins.ShapeEditor
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvLayer.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLayer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLayer.Size = new System.Drawing.Size(264, 437);
+            this.dgvLayer.Size = new System.Drawing.Size(288, 265);
             this.dgvLayer.TabIndex = 2;
             this.dgvLayer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvLayerCellContentClick);
-            // 
-            // cbPerformSnap
-            // 
-            this.cbPerformSnap.AutoSize = true;
-            this.cbPerformSnap.Checked = true;
-            this.cbPerformSnap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbPerformSnap.Location = new System.Drawing.Point(8, 12);
-            this.cbPerformSnap.Name = "cbPerformSnap";
-            this.cbPerformSnap.Size = new System.Drawing.Size(110, 17);
-            this.cbPerformSnap.TabIndex = 0;
-            this.cbPerformSnap.Text = "Perform Snapping";
-            this.cbPerformSnap.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Snap to the following layers:";
             // 
             // dgvcSnappable
             // 
@@ -135,11 +114,32 @@ namespace DotSpatial.Plugins.ShapeEditor
             this.dgvcLayerName.Name = "dgvcLayerName";
             this.dgvcLayerName.ReadOnly = true;
             // 
+            // cbPerformSnap
+            // 
+            this.cbPerformSnap.AutoSize = true;
+            this.cbPerformSnap.Checked = true;
+            this.cbPerformSnap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPerformSnap.Location = new System.Drawing.Point(9, 11);
+            this.cbPerformSnap.Name = "cbPerformSnap";
+            this.cbPerformSnap.Size = new System.Drawing.Size(125, 16);
+            this.cbPerformSnap.TabIndex = 0;
+            this.cbPerformSnap.Text = "Perform Snapping";
+            this.cbPerformSnap.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(166, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Snap to the following layers:";
+            // 
             // SnapSettingsDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 544);
+            this.ClientSize = new System.Drawing.Size(311, 364);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbPerformSnap);
             this.Controls.Add(this.dgvLayer);

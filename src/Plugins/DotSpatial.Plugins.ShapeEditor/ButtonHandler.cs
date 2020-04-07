@@ -237,6 +237,7 @@ namespace DotSpatial.Plugins.ShapeEditor
 
             if (_moveVertexFunction != null)
                 UpdateMoveVertexFunctionLayer();
+
             if (_addShapeFunction != null) // changed by jany_ (2016-02-24) update both because moveFeature might not be the active function just because it is not null
                 UpdateAddShapeFunctionLayer();
         }

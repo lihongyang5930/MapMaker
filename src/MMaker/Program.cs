@@ -23,13 +23,13 @@ namespace MMaker
         private static void Main()
         {
             var environment = new AppEnvironment();
-
             InitEnvironment(environment);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             InitializeLogger(environment.LoggerName, environment.LogsDirectory);
+
             InitializeSyncfusion();
 
             Appearances.DefaultFont = new System.Drawing.Font(
@@ -48,6 +48,7 @@ namespace MMaker
         private static void StartMapMaker(AppEnvironment environment)
         {
             var appStartTime = DateTime.Now;
+
             try
             {
                 var dialog = new DialogService(
@@ -59,12 +60,19 @@ namespace MMaker
                 var shell = new MmakerShell(environment, dialog, views);
                 Log.Logger.Information($"Initialized ({(DateTime.Now - appStartTime).TotalSeconds} sec)");
 
+                Log.Logger.Information("Start MapMaker");
                 Application.Run(shell);
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.ToString());
-                throw;
+#if DEBUG
+                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(ex.StackTrace.Split('\n')[0]);
+#endif         
+                Log.Logger.Error(ex.Message);
+                Log.Logger.Error(ex.StackTrace.Split('\n')[0]);
+
+                throw ex;
             }
             finally
             {
@@ -74,18 +82,18 @@ namespace MMaker
 
         private static void InitEnvironment(AppEnvironment environment)
         {
-            environment.ProcessFileName = Process.GetCurrentProcess().MainModule.FileName;
-            environment.ProcessDirName = Path.GetDirectoryName(environment.ProcessFileName);
-            environment.AppDataDirName = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);      // %AppData%
-            environment.RootDirectory = Path.Combine(environment.AppDataDirName, "MapMaker");               // %AppData%\DrPipe
-            environment.LogsDirectory = Path.Combine(environment.RootDirectory, "logs");                    // %AppData%\DrPipe\logs
-            environment.DataDirectory = Path.Combine(environment.RootDirectory, "data");                    // %AppData%\DrPipe\data
-            environment.DialogDefaultDirectory = Path.Combine(environment.ProcessDirName, @"samples");
-            environment.EpanetFileName = Path.Combine(environment.ProcessDirName, @"epanet\epanet2w\Epanet2w.exe");
-            environment.TempDirectory = Path.Combine(environment.ProcessDirName, @"_temp");
-            environment.FirebirdClientFileName = Path.Combine(environment.ProcessDirName, @"firebird\fbembed.dll");
-            environment.FirebirdGbakFileName = Path.Combine(environment.ProcessDirName, @"firebird\gbak.exe");
-            environment.LoggerName = "MapMaker";
+            environment.ProcessFileName         = Process.GetCurrentProcess().MainModule.FileName;
+            environment.ProcessDirName          = Path.GetDirectoryName(environment.ProcessFileName);
+            environment.AppDataDirName          = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);      // %AppData%
+            environment.RootDirectory           = Path.Combine(environment.AppDataDirName, "MapMaker");               // %AppData%\DrPipe
+            environment.LogsDirectory           = Path.Combine(environment.RootDirectory, "logs");                    // %AppData%\DrPipe\logs
+            environment.DataDirectory           = Path.Combine(environment.RootDirectory, "data");                    // %AppData%\DrPipe\data
+            environment.DialogDefaultDirectory  = Path.Combine(environment.ProcessDirName, @"samples");
+            environment.EpanetFileName          = Path.Combine(environment.ProcessDirName, @"epanet\epanet2w\Epanet2w.exe");
+            environment.TempDirectory           = Path.Combine(environment.ProcessDirName, @"_temp");
+            environment.FirebirdClientFileName  = Path.Combine(environment.ProcessDirName, @"firebird\fbembed.dll");
+            environment.FirebirdGbakFileName    = Path.Combine(environment.ProcessDirName, @"firebird\gbak.exe");
+            environment.LoggerName              = "MapMaker";
 
             Directory.CreateDirectory(environment.RootDirectory);
             Directory.CreateDirectory(environment.LogsDirectory);

@@ -43,17 +43,18 @@ namespace MMaker
             }
         }
 
-        public DockManager DockManager { get; set; }
-        public RibbonManager RibbonManager { get; set; }
-        public AppEnvironment AppEnvironment { get; set; }
-        public ViewService Views { get; set; }
-        public DialogService Dialog { get; set; }
-        public Form MainForm => this;
-        public AppManager AppManager { get; set; }
+        public DockManager      DockManager { get; set; }
+        public RibbonManager    RibbonManager { get; set; }
+        public AppEnvironment   AppEnvironment { get; set; }
+        public ViewService      Views { get; set; }
+        public DialogService    Dialog { get; set; }
+        public Form             MainForm => this;
+        public AppManager       AppManager { get; set; }
 
         //[20200330] fdragons : comment out fallowing two lines for using DotSpatial components
-        public MapView MapView { get; set; }
-        public LegendView LegendView { get; set; }
+        public MapView          MapView { get; set; }
+        public LegendView       LegendView { get; set; }
+
         public MmakerShell(AppEnvironment environment, DialogService dialog, ViewService views)
         {
             //[20200319]fdragons - for Trace
@@ -64,13 +65,13 @@ namespace MMaker
 
             AppTitle = "K-water MapMaker v2.0.1";
 
-            Dialog = dialog;
-            Views = views;
-            AppEnvironment = environment;
-            AppManager = appManager;
+            Dialog          = dialog;
+            Views           = views;
+            AppEnvironment  = environment;
+            AppManager      = appManager;
 
-            DockManager = new DockManager(dockingManager, this);
-            RibbonManager = new RibbonManager(ribbonControlAdv1);
+            DockManager     = new DockManager(dockingManager, this);
+            RibbonManager   = new RibbonManager(ribbonControlAdv1);
 
             Load += async (s, e) => await Initialize();
 

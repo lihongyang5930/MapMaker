@@ -55,7 +55,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         /// <summary>
         /// Gets or sets the pen that will be used to draw the snapping circle.
         /// </summary>
-        protected Pen SnapPen { get; set; } = new Pen(Color.HotPink, 2F);
+        protected Pen SnapPen { get; set; } = new Pen(Color.HotPink, 3F);
 
         /// <summary>
         /// Gets or sets the snap tolerance. +/- N pixels around the mouse point.

@@ -120,33 +120,37 @@ namespace MindOne.Core.Services
         }
         private CommonOpenFileDialog CreateOpenFileDialog(string title = null)
         {
-            var dialog              = new CommonOpenFileDialog();
-            dialog.Title            = title ?? _openDialogTitle;
-            dialog.RestoreDirectory = true;
-            dialog.IsFolderPicker   = false;
-            dialog.DefaultDirectory = _defaultDirectory;
-            dialog.AddToMostRecentlyUsedList = false;
-            dialog.AllowNonFileSystemItems   = false;
-            dialog.EnsureFileExists = true;
-            dialog.EnsurePathExists = true;
-            dialog.EnsureReadOnly   = false;
-            dialog.EnsureValidNames = true;
-            dialog.Multiselect      = true;
-            dialog.ShowPlacesList   = true;
+            var dialog = new CommonOpenFileDialog
+            {
+                Title = title ?? _openDialogTitle,
+                RestoreDirectory = true,
+                IsFolderPicker = false,
+                DefaultDirectory = _defaultDirectory,
+                AddToMostRecentlyUsedList = false,
+                AllowNonFileSystemItems = false,
+                EnsureFileExists = true,
+                EnsurePathExists = true,
+                EnsureReadOnly = false,
+                EnsureValidNames = true,
+                Multiselect = true,
+                ShowPlacesList = true
+            };
             return dialog;
         }
 
         private CommonSaveFileDialog CreateSaveFileDialog(string title = null, string defaultFileName = null)
         {
-            var dialog              = new CommonSaveFileDialog();
-            dialog.Title            = title ?? _saveDialogTitle;
-            dialog.RestoreDirectory = true;
-            dialog.DefaultFileName  = defaultFileName;
-            dialog.DefaultDirectory = _defaultDirectory;
-            dialog.AddToMostRecentlyUsedList = false;
-            dialog.EnsureValidNames = true;
-            dialog.ShowPlacesList   = true;
-            dialog.DefaultExtension = null;
+            var dialog = new CommonSaveFileDialog
+            {
+                Title = title ?? _saveDialogTitle,
+                RestoreDirectory = true,
+                DefaultFileName = defaultFileName,
+                DefaultDirectory = _defaultDirectory,
+                AddToMostRecentlyUsedList = false,
+                EnsureValidNames = true,
+                ShowPlacesList = true,
+                DefaultExtension = null
+            };
             return dialog;
         }
     }

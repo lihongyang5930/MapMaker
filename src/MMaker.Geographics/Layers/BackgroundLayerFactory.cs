@@ -22,30 +22,32 @@ namespace MMaker.Geographics.Layers
                                 sources, 
                                 selector: src => layerNames.Contains(src.Name), 
                                 orderer : src => Array.IndexOf(layerNames, src.Name));
-            var set        = new BackgroundLayerSet(layers);
-            //set.Add("없음");
-            set.Add("일반"      , false, "VworldBase");
-            set.Add("위성"      , true,  "VworldSatellite");
-            set.Add("위성(중첩)", true,  "VworldSatellite", "VworldHybrid");
+            var set = new BackgroundLayerSet(layers)
+            {
+                { "일반", false, "VworldBase" },
+                { "위성", true, "VworldSatellite" },
+                { "위성(중첩)", true, "VworldSatellite", "VworldHybrid" }
+            };
             return set;
         }
         public Task<BackgroundLayerSet> GetKakaoMap()
         {
             var root = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var tile = System.IO.Path.Combine(root, "Daum");
-            var schema      = GetKakaomapSchema();
+            var schema = GetKakaomapSchema();
             var serverNodes = new[] { "0", "1", "2", "3" };
             var sources = new[] {
                 new HttpTileSource(schema, name: "map_2d"     , serverNodes: serverNodes, urlFormatter: "http://map{s}.daumcdn.net/map_2d/1906plw/L{z}/{y}/{x}.png", persistentCache: new FileCache(System.IO.Path.Combine(tile, "map"), "png")),
                 new HttpTileSource(schema, name: "map_skyview", serverNodes: serverNodes, urlFormatter: "http://map{s}.daumcdn.net/map_skyview/L{z}/{y}/{x}.jpg?v=160114", persistentCache: new FileCache(System.IO.Path.Combine(tile, "sky"), "png")),
                 new HttpTileSource(schema, name: "map_hybrid" , serverNodes: serverNodes, urlFormatter: "http://map{s}.daumcdn.net/map_hybrid/1807hsm/L{z}/{y}/{x}.png", persistentCache: new FileCache(System.IO.Path.Combine(tile, "hybrid"), "png"))
             };
-            var layers      = GetTileLayers(sources);
-            var set         = new BackgroundLayerSet(layers);
-            //set.Add("없음");
-            set.Add("일반"      , false, "map_2d");
-            set.Add("위성"      , true , "map_skyview");
-            set.Add("위성(중첩)", true , "map_skyview", "map_hybrid");
+            var layers = GetTileLayers(sources);
+            var set = new BackgroundLayerSet(layers)
+            {
+                { "일반", false, "map_2d" },
+                { "위성", true, "map_skyview" },
+                { "위성(중첩)", true, "map_skyview", "map_hybrid" }
+            };
             return Task.FromResult(set);
 
             // https://bbong95.github.io/leaflet/2018/08/06/Leaflet-%EB%A7%9B%EB%B3%B4%EA%B8%B0-4%ED%83%84/

@@ -70,8 +70,9 @@ namespace MMaker.Diagnosis.Views
                 }
 
                 ///로드 시작
-                IMapLayer layer = MmakerShell.AppManager.Map.Layers.SelectedLayer;
-                if(_allWTLayerBtns.Cast<RadioButtonAdv>().FirstOrDefault(x => x.Checked).Text == "기타")
+                //IMapLayer layer = MmakerShell.AppManager.Map.Layers.SelectedLayer;
+                IMapLayer layer = null;
+                if (_allWTLayerBtns.Cast<RadioButtonAdv>().FirstOrDefault(x => x.Checked).Text == "기타")
                 {
                     ///[20200323] fdragons - 동일 이름의 레이어가 이미 로드되어 있으면 합칠 것인지 확인한다.
                     var v = MmakerShell.AppManager.Map.Layers.FirstOrDefault(x => x.DataSet?.Name == _orgData.Name);

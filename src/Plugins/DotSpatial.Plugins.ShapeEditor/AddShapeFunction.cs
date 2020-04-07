@@ -89,7 +89,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Methods
 
         /// <summary>
-        /// Delete the shape currently being edited.
+        /// 신규 도형요소 입력 중 취소처리
         /// </summary>
         /// <param name="sender">The sender of the DeleteShape event.</param>
         /// <param name="e">An empty EventArgument.</param>
@@ -127,7 +127,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Finish the shape.
+        /// 신규 도형요소 입력 종료처리
         /// </summary>
         /// <param name="sender">The object sender.</param>
         /// <param name="e">An empty EventArgs class.</param>
@@ -221,12 +221,15 @@ namespace DotSpatial.Plugins.ShapeEditor
             {
                 if (_context.MenuItems.Contains(_finishPart)) _context.MenuItems.Remove(_finishPart);
             }
-            else if (!_context.MenuItems.Contains(_finishPart))
-            {
-                _context.MenuItems.Add(1, _finishPart);
-            }
 
-            _coordinateDialog.Show();
+            // [20200403] fdragons - disable menu multi-part feacture
+            //else if (!_context.MenuItems.Contains(_finishPart))
+            //{
+            //    _context.MenuItems.Add(1, _finishPart);
+            //}
+
+            // [20200403] fdragons - do not show dialog
+            // _coordinateDialog.Show();
             _coordinateDialog.FormClosing += CoordinateDialogFormClosing;
             if (!_standBy) _coordinates = new List<Coordinate>();
             if (_tempLayer != null)
@@ -495,10 +498,10 @@ namespace DotSpatial.Plugins.ShapeEditor
         {
             YieldStyle = YieldStyles.LeftButton | YieldStyles.RightButton;
             _context = new ContextMenu();
-            _context.MenuItems.Add("Delete", DeleteShape);
-            _finishPart = new MenuItem("Finish Part", FinishPart);
+            _context.MenuItems.Add("편집취소", DeleteShape);
+            _finishPart = new MenuItem("멀티파트", FinishPart);
             _context.MenuItems.Add(_finishPart);
-            _context.MenuItems.Add("Finish Shape", FinishShape);
+            _context.MenuItems.Add("입력완료", FinishShape);
             _parts = new List<List<Coordinate>>();
         }
 

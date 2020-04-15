@@ -6,14 +6,14 @@ using DotSpatial.Symbology;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// Class to control layers snappable property through the datagridview.
+    /// datagridview를 통해 스냅 가능한 속성을 제어하는 클래스입니다.
     /// </summary>
     public class SnapLayer
     {
         #region Fields
 
         /// <summary>
-        /// Layer, whose snappable property can be changed.
+        /// 스냅 가능한 속성을 변경할 수있는 레이어입니다.
         /// </summary>
         private readonly IFeatureLayer _layer;
 
@@ -22,9 +22,9 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SnapLayer"/> class.
+        /// <see cref = "SnapLayer"/> 클래스의 새 인스턴스를 초기화합니다.
         /// </summary>
-        /// <param name="pLayer">Layer, for which the SnapLayer-object gets created.</param>
+        /// <param name="pLayer">SnapLayer 객체가 생성되는 레이어입니다.</param>
         public SnapLayer(IFeatureLayer pLayer)
         {
             _layer = pLayer;
@@ -35,12 +35,12 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Properties
 
         /// <summary>
-        /// Gets the layer name so it can be shown in the DataGridView.
+        /// Gets 레이어 이름으로 DataGridView에 표시 할 수 있습니다.
         /// </summary>
         public string LayerName => _layer.LegendText;
 
         /// <summary>
-        /// Gets or sets a value indicating whether snapping to the coordinates of the layers features is allowed.
+        /// Gets or sets 레이어 피처의 좌표에 스냅이 허용되는지 여부를 나타내는 값.
         /// </summary>
         public bool Snappable
         {

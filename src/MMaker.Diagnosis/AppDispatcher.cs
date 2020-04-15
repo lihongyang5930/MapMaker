@@ -67,15 +67,15 @@ namespace MMaker.Diagnosis
         /// <returns></returns>
         private bool HandleGenerator(AppCommand command)
         {
-            //if (!Map.Layers.Any())
-            //{
-            //    MessageHelper.Info("레이어 불러오기를 실행하십시오.");
-            //    return false;
-            //}
+            if (!Map.Layers.Any())
+            {
+                MessageHelper.Info("레이어 불러오기를 실행하십시오.");
+                return false;
+            }
 
             switch (command)
             {
-                #region 관망모델
+                /// 관망모델 메뉴
                 case AppCommand.Grid:   //-> GRID생성
                     MessageHelper.Info("개발중..." + command.EnumToString());
                     return true;
@@ -123,8 +123,8 @@ namespace MMaker.Diagnosis
                     //App.Map.Redraw2(tkRedrawType.RedrawSkipDataLayers);
                     MessageHelper.Info("개발중..." + command.EnumToString());
                     return true;
-                #endregion
-                #region 도구
+
+                /// 도구 메뉴
                 case AppCommand.Epanet: //EPANET실행
                     MessageHelper.Info("개발중..." + command.EnumToString());
                     //App.Map.Identifier.HotTracking = !App.Map.Identifier.HotTracking;
@@ -138,6 +138,7 @@ namespace MMaker.Diagnosis
                     return true;
 
                 case AppCommand.SaveDpf:    //Dr.Pipe저장
+                    MessageHelper.Info("개발중..." + command.EnumToString());
                     //string file = "";
                     //if (!MWL.Core.UI.FileHelper.ShowSaveDialog(null, Core.FileType.DrPipe, ref file)) return false;
 
@@ -147,9 +148,9 @@ namespace MMaker.Diagnosis
                     return true;
 
                 case AppCommand.Testdbf:    //테스트
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     LayerHelper.CCC();
                     return true; 
-                    #endregion
             }
             return false;
         }
@@ -171,10 +172,12 @@ namespace MMaker.Diagnosis
             switch (command)
             {
                 case AppCommand.Snapshot:
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     //App.Map.MakeScreenshot(MainForm.Instance);
                     break;
 
                 case AppCommand.Search:
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     //using (var form = new GeoLocationForm())
                     //{
                     //    form.ShowDialog(MainForm.Instance);
@@ -182,6 +185,7 @@ namespace MMaker.Diagnosis
                     break;
 
                 case AppCommand.LoadProject:
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     //{
                     //    string filename;
                     //    if (FileHelper.ShowOpenDialog(MainForm.Instance, FileType.Project, out filename))
@@ -195,12 +199,16 @@ namespace MMaker.Diagnosis
                     return true;
 
                 case AppCommand.CloseProject:   //새프로젝트
-                    MmakerShell.AppManager.Map.ClearLayers();
-                    MMaker.Core.AppStatic.ReSetLayers();
-                    //App.Project.TryClose();
+                    MessageHelper.Info("준비중..." + command.EnumToString());
+                    {
+                        MmakerShell.AppManager.Map.ClearLayers();
+                        MMaker.Core.AppStatic.ReSetLayers();
+                        //App.Project.TryClose();
+                    }
                     return true;
 
                 case AppCommand.SetProjection:
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     {
                         //if (App.Map.NumLayers > 0)
                         //{
@@ -215,6 +223,7 @@ namespace MMaker.Diagnosis
                     return true;
 
                 case AppCommand.SaveProject:
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     //{
                     //    if (App.Project.Save())
                     //        MessageHelper.Info("Project was saved: " + App.Project.GetPath());
@@ -222,6 +231,7 @@ namespace MMaker.Diagnosis
                     return true;
 
                 case AppCommand.SaveProjectAs:
+                    MessageHelper.Info("준비중..." + command.EnumToString());
                     //App.Project.SaveAs();
                     return true;
 
@@ -248,7 +258,9 @@ namespace MMaker.Diagnosis
                 //case AppCommand.AddRaster:
                 //    LayerHelper.AddLayer(LayerType.Raster);
                 //    return true;
-                case AppCommand.AddVector:  //관리 -> 레이어 불러오기
+                
+                //관리 -> 레이어 불러오기
+                case AppCommand.AddVector:
                 {
                     var dm = new DotSpatial.Data.DataManager() { LoadInRam = true };
 
@@ -308,7 +320,6 @@ namespace MMaker.Diagnosis
                 //    return SetMapCursor(tkCursorMode.cmSelection);
                 case AppCommand.ZoomIn:
                     return SetMapCursor(DotSpatial.Controls.FunctionMode.ZoomIn);
-
                 case AppCommand.ZoomOut:
                     return SetMapCursor(DotSpatial.Controls.FunctionMode.ZoomOut);
                 //case AppCommand.ZoomToSelected:

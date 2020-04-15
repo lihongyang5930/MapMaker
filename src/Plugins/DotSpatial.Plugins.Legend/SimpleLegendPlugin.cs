@@ -37,7 +37,14 @@ namespace DotSpatial.Plugins.SimpleLegend
             }
 
             App.Legend = legend1;
-            App.DockManager.Add(new DockablePanel("kLegend", Resources.Legend, legend1, DockStyle.Left) { SmallImage = Resources.legend_16x16 });
+            App.DockManager.Add(
+                new DockablePanel("kLegend"
+                , Resources.Legend
+                , legend1
+                , DockStyle.Left)
+                {
+                    SmallImage = Resources.legend_16x16
+                });
         }
     }
 }

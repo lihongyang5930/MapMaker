@@ -6,7 +6,7 @@ using DotSpatial.Controls;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// Initializes a new instance of the ShapeEditorPlugin class.
+    /// ShapeEditorPlugin 클래스의 새 인스턴스를 초기화합니다.
     /// </summary>
     public class ShapeEditorPlugin : Extension
     {
@@ -22,9 +22,10 @@ namespace DotSpatial.Plugins.ShapeEditor
         public override void Activate()
         {
             _myHandler = new ButtonHandler(App)
-                         {
-                             Map = App.Map
-                         };
+            {
+                Map = App.Map,
+            };
+
             base.Activate();
         }
 
@@ -33,6 +34,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         {
             App.HeaderControl?.RemoveAll();
             _myHandler?.Dispose();
+
             base.Deactivate();
         }
 

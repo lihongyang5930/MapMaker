@@ -58,149 +58,7 @@ namespace MMaker.Diagnosis.Views
         private void InitEvent()
         {
             this.btnClose.Click += (s, e) => { DialogResult = DialogResult.Cancel; this.Close(); };
-            this.btnConform.Click += (s, e) => 
-            {
-                ///매핑 완료 체크
-                if(_stdColumnCnts != _mappingCnts)
-                {
-                    MessageBox.Show("모든 표준 속성이 매핑 완료된 후"
-                        + "\n진행할 수 있습니다."
-                        , base.MmakerShell.AppTitle);
-                    return;
-                }
-
-                ///로드 시작
-                //IMapLayer layer = MmakerShell.AppManager.Map.Layers.SelectedLayer;
-                IMapLayer layer = null;
-                if (_allWTLayerBtns.Cast<RadioButtonAdv>().FirstOrDefault(x => x.Checked).Text == "기타")
-                {
-                    ///[20200323] fdragons - 동일 이름의 레이어가 이미 로드되어 있으면 합칠 것인지 확인한다.
-                    var v = MmakerShell.AppManager.Map.Layers.FirstOrDefault(x => x.DataSet?.Name == _orgData.Name);
-                    if (v != null)
-                    {
-                        layer = v;
-                        if (DialogResult.Yes != MessageBox.Show($"[{_orgData.Name}]"
-                            + "\n동일 레이어가 존재합니다."
-                            + "\n기존 레이어에 추가 하시겠습니까?"
-                            , base.MmakerShell.AppTitle
-                            , MessageBoxButtons.YesNo))
-                        {
-                            MessageBox.Show($"[{_orgData.Name}]"
-                                + "\n선택한 레이어는 등록할 수 없습니다."
-                                , base.MmakerShell.AppTitle, MessageBoxButtons.YesNo);
-                            return;
-                        }
-
-                        ///[20200323] fdragons 선택된 레이어 데이터를 표준레이어로 복제한다.
-                        try
-                        {
-                            var fcs = (IFeatureSet)layer.DataSet;
-                            foreach (IFeature f in ((IFeatureSet)_orgData).Features)
-                            {
-                                IFeature nf = fcs.AddFeature(f.Geometry);
-                                nf.CopyAttributes(f);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Trace.WriteLine(ex.ToString());
-                            throw;
-                        }
-                    }
-                    else
-                    {
-                        ///참조용 레이어로 추가한다.
-                        layer = MmakerShell.AppManager.Map.Layers.Add((IFeatureSet)_orgData);
-                    }
-                }
-                else
-                {
-                    ///선택 레이어를 표준 WTL레이어로 변환한다.
-                    IFeatureSet cfs = CurrentFeatureSet();
-                    if(cfs == null)
-                    {
-                        MessageBox.Show("표준 레이어에 등록되지 않은 레이어입니다."
-                            , base.MmakerShell.AppTitle);
-                        return;
-                    }
-
-                    ///[20200323] fdragons - 표준 레이어가 이미 로드되어 있으면 합칠 것인지 확인한다.
-                    var v = MmakerShell.AppManager.Map.Layers.FirstOrDefault(x => x.DataSet?.Name == cfs.Name);
-                    if(v != null)
-                    {
-                        layer = v;
-                        if(DialogResult.Yes != MessageBox.Show($"[{cfs.Name}]"
-                            + "\n표준 레이어는 이미 로드되어 있습니다."
-                            + "\n기존 레이어에 추가 하시겠습니까?"
-                            , base.MmakerShell.AppTitle
-                            , MessageBoxButtons.YesNo))
-                        {
-                            MessageBox.Show($"[{cfs.Name}]"
-                                + "\n선택한 레이어는 등록할 수 없습니다."
-                                , base.MmakerShell.AppTitle, MessageBoxButtons.YesNo);
-                            return;
-                        }
-                    }
-
-                    ///1. 컬럼 매핑정보 읽기
-                    DataTable dataTable = ((IFeatureSet)_orgData).DataTable;
-
-                    try
-                    {
-                        for(int i = 0; i < lstMappedCols.Items.Count; i++)
-                        {
-                            ///2. 매핑정보를 이용하여 _orgData의 컬럼명을 표준 컬럼명으로 이름변경
-                            bool a = GetFieldNameInlstMappedColsUsingIndex(i, out string szOrg, out string szStd);
-                            if(szOrg.Equals("*None*"))
-                                continue;
-                            
-                            /// 표준 명칭이 기 존재하면 스킵
-                            if(IsFieldUsedInlstMappedCols(2, szStd)) 
-                                continue;
-
-                            dataTable.Columns[szOrg].ColumnName = szStd;
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                        Trace.WriteLine(ex.ToString());
-                        throw;
-                    }
-
-                    ///3. 선택된 레이어 데이터를 표준레이어로 복제한다.
-                    try
-                    {
-                        foreach(IFeature f in ((IFeatureSet)_orgData).Features)
-                        {
-                            IFeature nf = cfs.AddFeature(f.Geometry);
-                            nf.CopyAttributes(f);
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                        Trace.WriteLine(ex.ToString());
-                        throw;
-                    }
-
-                    ///4. 복제된 레이어를 등록한다.
-                    if(layer == null)
-                    {
-                        layer = MmakerShell.AppManager.Map.Layers.Add(cfs);
-                    }
-                }
-
-                ///[20200320] fdragons - 레이어 영역 업데이트
-                if (layer != null)
-                {
-                    layer.Extent.ExpandToInclude(((IFeatureSet)_orgData).Extent);
-                    ZoomToLayer(layer);
-                }
-
-                MmakerShell.AppManager.Map.Refresh();
-
-                DialogResult = DialogResult.OK;
-                this.Close();
-            };
+            this.btnConform.Click += BtnConform_Click;
 
             this.chkShowAllMapping.CheckedChanged += (s, e) =>
             {
@@ -209,6 +67,150 @@ namespace MMaker.Diagnosis.Views
                 if(_currentLayerBtn != null)
                     OnRadioButtonClick(_currentLayerBtn, new EventArgs());
             };
+        }
+
+        private void BtnConform_Click(object sender, EventArgs e)
+        {
+            ///로드 시작
+            IMapLayer layer = null;
+
+            if (_allWTLayerBtns.Cast<RadioButtonAdv>().FirstOrDefault(x => x.Checked).Text != "기타")
+            {
+                ///선택 레이어를 표준 WTL레이어로 변환한다.
+                IFeatureSet cfs = CurrentFeatureSet();
+                if (cfs == null)
+                {
+                    MessageBox.Show("표준 레이어에 등록되지 않은 레이어입니다."
+                        , base.MmakerShell.AppTitle);
+                    return;
+                }
+
+                ///[20200323] fdragons - 표준 레이어가 이미 로드되어 있으면 합칠 것인지 확인한다.
+                var v = MmakerShell.AppManager.Map.Layers.FirstOrDefault(x => x.DataSet?.Name == cfs.Name);
+                if (v != null)
+                {
+                    layer = v;
+                    if (DialogResult.Yes != MessageBox.Show($"[{cfs.Name}]"
+                        + "\n표준 레이어는 이미 로드되어 있습니다."
+                        + "\n기존 레이어에 추가 하시겠습니까?"
+                        , base.MmakerShell.AppTitle
+                        , MessageBoxButtons.YesNo))
+                    {
+                        MessageBox.Show($"[{cfs.Name}]"
+                            + "\n선택한 레이어는 등록할 수 없습니다."
+                            , base.MmakerShell.AppTitle, MessageBoxButtons.YesNo);
+                        return;
+                    }
+                }
+
+                ///1. 컬럼 매핑정보 읽기
+                DataTable dataTable = ((IFeatureSet)_orgData).DataTable;
+
+                try
+                {
+                    for (int i = 0; i < lstMappedCols.Items.Count; i++)
+                    {
+                        ///2. 매핑정보를 이용하여 _orgData의 컬럼명을 표준 컬럼명으로 이름변경
+                        bool a = GetFieldNameInlstMappedColsUsingIndex(i, out string szOrg, out string szStd);
+                        if (szOrg.Equals("*None*"))
+                            continue;
+
+                        /// 표준 명칭이 기 존재하면 스킵
+                        if (IsFieldUsedInlstMappedCols(2, szStd))
+                            continue;
+
+                        dataTable.Columns[szOrg].ColumnName = szStd;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.ToString());
+                    throw;
+                }
+
+                ///3. 선택된 레이어 데이터를 표준레이어로 복제한다.
+                try
+                {
+                    foreach (IFeature f in ((IFeatureSet)_orgData).Features)
+                    {
+                        IFeature nf = cfs.AddFeature(f.Geometry);
+                        nf.CopyAttributes(f);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.ToString());
+                    throw;
+                }
+
+                ///4. 복제된 레이어를 등록한다.
+                if (layer == null)
+                {
+                    layer = MmakerShell.AppManager.Map.Layers.Add(cfs);
+                }
+            }
+            else
+            {
+                ///매핑 완료 체크
+                if (_stdColumnCnts != _mappingCnts)
+                {
+                    MessageBox.Show("모든 표준 속성이 매핑 완료된 후"
+                        + "\n진행할 수 있습니다."
+                        , base.MmakerShell.AppTitle);
+                    return;
+                }
+
+                ///[20200323] fdragons - 동일 이름의 레이어가 이미 로드되어 있으면 합칠 것인지 확인한다.
+                var v = MmakerShell.AppManager.Map.Layers.FirstOrDefault(x => x.DataSet?.Name == _orgData.Name);
+                if (v != null)
+                {
+                    layer = v;
+                    if (DialogResult.Yes != MessageBox.Show($"[{_orgData.Name}]"
+                        + "\n동일 레이어가 존재합니다."
+                        + "\n기존 레이어에 추가 하시겠습니까?"
+                        , base.MmakerShell.AppTitle
+                        , MessageBoxButtons.YesNo))
+                    {
+                        MessageBox.Show($"[{_orgData.Name}]"
+                            + "\n선택한 레이어는 등록할 수 없습니다."
+                            , base.MmakerShell.AppTitle, MessageBoxButtons.YesNo);
+                        return;
+                    }
+
+                    ///[20200323] fdragons 선택된 레이어 데이터를 표준레이어로 복제한다.
+                    try
+                    {
+                        var fcs = (IFeatureSet)layer.DataSet;
+                        foreach (IFeature f in ((IFeatureSet)_orgData).Features)
+                        {
+                            IFeature nf = fcs.AddFeature(f.Geometry);
+                            nf.CopyAttributes(f);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex.ToString());
+                        throw;
+                    }
+                }
+                else
+                {
+                    ///참조용 레이어로 추가한다.
+                    layer = MmakerShell.AppManager.Map.Layers.Add((IFeatureSet)_orgData);
+                }
+            }
+
+            ///[20200320] fdragons - 레이어 영역 업데이트
+            if (layer != null)
+            {
+                layer.Extent.ExpandToInclude(((IFeatureSet)_orgData).Extent);
+                ZoomToLayer(layer);
+            }
+
+            MmakerShell.AppManager.Map.Refresh();
+
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         /// <summary>
@@ -696,7 +698,7 @@ namespace MMaker.Diagnosis.Views
 
             if(layerEnvelope.IsNull)
             {
-                MessageBox.Show("위치를 확인할 수 없습니다.", base.MmakerShell.AppTitle);
+                MessageBox.Show("(내용없음)위치를 확인할 수 없습니다.", base.MmakerShell.AppTitle);
                 return;
             }
             if(layerEnvelope.Width > eps && layerEnvelope.Height > eps)

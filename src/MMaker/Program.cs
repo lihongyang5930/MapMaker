@@ -84,10 +84,10 @@ namespace MMaker
         {
             environment.ProcessFileName         = Process.GetCurrentProcess().MainModule.FileName;
             environment.ProcessDirName          = Path.GetDirectoryName(environment.ProcessFileName);
-            environment.AppDataDirName          = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);      // %AppData%
-            environment.RootDirectory           = Path.Combine(environment.AppDataDirName, "MapMaker");               // %AppData%\DrPipe
-            environment.LogsDirectory           = Path.Combine(environment.RootDirectory, "logs");                    // %AppData%\DrPipe\logs
-            environment.DataDirectory           = Path.Combine(environment.RootDirectory, "data");                    // %AppData%\DrPipe\data
+            environment.AppDataDirName          = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);     // %AppData%
+            environment.RootDirectory           = Path.Combine(environment.AppDataDirName, "MapMaker");             // %AppData%\DrPipe
+            environment.LogsDirectory           = Path.Combine(environment.RootDirectory, "logs");                  // %AppData%\DrPipe\logs
+            environment.DataDirectory           = Path.Combine(environment.RootDirectory, "data");                  // %AppData%\DrPipe\data
             environment.DialogDefaultDirectory  = Path.Combine(environment.ProcessDirName, @"samples");
             environment.EpanetFileName          = Path.Combine(environment.ProcessDirName, @"epanet\epanet2w\Epanet2w.exe");
             environment.TempDirectory           = Path.Combine(environment.ProcessDirName, @"_temp");

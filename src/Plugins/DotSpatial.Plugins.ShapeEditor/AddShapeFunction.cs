@@ -18,7 +18,7 @@ using Point = System.Drawing.Point;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// This function allows interacting with the map through mouse clicks to create a new shape.
+    /// 이 기능을 사용하면 마우스 클릭을 통해 지도와 상호 작용하여 새로운 모양을 만들 수 있습니다.
     /// </summary>
     public class AddShapeFunction : SnappableMapFunction, IDisposable
     {
@@ -40,9 +40,9 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region  Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddShapeFunction"/> class. This specifies the Map that this function should be applied to.
+        /// <see cref = "AddShapeFunction"/> 클래스의 새 인스턴스를 초기화합니다. 이 함수를 적용 할 맵을 지정합니다.
         /// </summary>
-        /// <param name="map">The map control that implements the IMap interface that this function uses.</param>
+        /// <param name="map">이 함수가 사용하는 IMap 인터페이스를 구현하는 맵 컨트롤입니다.</param>
         public AddShapeFunction(IMap map)
             : base(map)
         {
@@ -50,7 +50,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="AddShapeFunction"/> class.
+        /// <see cref = "AddShapeFunction"/> 클래스의 인스턴스를 마무리합니다.
         /// </summary>
         ~AddShapeFunction()
         {
@@ -62,12 +62,12 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Properties
 
         /// <summary>
-        /// Gets a value indicating whether the "dispose" method has been called.
+        /// Gets "dispose"메소드가 호출되었는지 여부를 나타내는 값
         /// </summary>
         public bool IsDisposed { get; private set; }
 
         /// <summary>
-        /// Gets or sets the layer to which the shape is added.
+        /// Gets or sets 편집대상 레이어
         /// </summary>
         public IFeatureLayer Layer
         {
@@ -101,8 +101,8 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Actually, this creates disposable items but doesn't own them.
-        /// When the ribbon disposes it will remove the items.
+        /// 실제로 이것은 일회용품을 만들지 만 소유하지는 않습니다.
+        /// 리본이 폐기되면 품목이 제거됩니다.
         /// </summary>
         public void Dispose()
         {
@@ -113,13 +113,14 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Finish the part of the shape being edited.
+        /// 편집중인 도형요소 멜티파트 완료처리
         /// </summary>
         /// <param name="sender">The object sender.</param>
         /// <param name="e">An empty EventArgs class.</param>
         public void FinishPart(object sender, EventArgs e)
         {
-            if (_featureSet.FeatureType == FeatureType.Polygon && !_coordinates[0].Equals2D(_coordinates[_coordinates.Count - 1])) _coordinates.Add(_coordinates[0]); // close polygons because they must be closed
+            // 도형요소(면) 클로징 처리
+            if (_featureSet.FeatureType == FeatureType.Polygon && !_coordinates[0].Equals2D(_coordinates[_coordinates.Count - 1])) _coordinates.Add(_coordinates[0]);
 
             _parts.Add(_coordinates);
             _coordinates = new List<Coordinate>();
@@ -172,7 +173,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Disposes this handler, removing any buttons that it is responsible for adding.
+        /// 이 처리기를 삭제하여 추가를 담당하는 모든 버튼을 제거합니다.
         /// </summary>
         /// <param name="disposeManagedResources">Disposes of the resources.</param>
         protected virtual void Dispose(bool disposeManagedResources)
@@ -208,7 +209,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Forces this function to begin collecting points for building a new shape.
+        /// 이 함수가 새로운 모양을 만들기 위해 점을 수집하도록합니다.
         /// </summary>
         protected override void OnActivate()
         {
@@ -221,15 +222,12 @@ namespace DotSpatial.Plugins.ShapeEditor
             {
                 if (_context.MenuItems.Contains(_finishPart)) _context.MenuItems.Remove(_finishPart);
             }
+            else if (!_context.MenuItems.Contains(_finishPart))
+            {
+                _context.MenuItems.Add(1, _finishPart);
+            }
 
-            // [20200403] fdragons - disable menu multi-part feacture
-            //else if (!_context.MenuItems.Contains(_finishPart))
-            //{
-            //    _context.MenuItems.Add(1, _finishPart);
-            //}
-
-            // [20200403] fdragons - do not show dialog
-            // _coordinateDialog.Show();
+            _coordinateDialog.Show();
             _coordinateDialog.FormClosing += CoordinateDialogFormClosing;
             if (!_standBy) _coordinates = new List<Coordinate>();
             if (_tempLayer != null)
@@ -245,7 +243,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Allows for new behavior during deactivation.
+        /// 비활성화하는 동안 새로운 동작을 허용합니다.
         /// </summary>
         protected override void OnDeactivate()
         {
@@ -254,8 +252,8 @@ namespace DotSpatial.Plugins.ShapeEditor
                 return;
             }
 
-            // Don't completely deactivate, but rather go into standby mode
-            // where we draw only the content that we have actually locked in.
+            // 완전히 비활성화하지 않고 대기 모드로 전환하십시오.
+            // 여기서 실제로 잠근 내용 만 그립니다.
             _standBy = true;
             _coordinateDialog?.Hide();
 
@@ -283,7 +281,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Handles drawing of editing features.
+        /// 편집 기능 그리기를 처리합니다.
         /// </summary>
         /// <param name="e">The drawing args for the draw method.</param>
         protected override void OnDraw(MapDrawArgs e)
@@ -293,16 +291,16 @@ namespace DotSpatial.Plugins.ShapeEditor
                 return;
             }
 
-            // Begin snapping changes
+            // 스냅 시작
             DoSnapDrawing(e.Graphics, _mousePosition);
 
-            // End snapping changes
+            // 도형요소가 점인 경우 스냅 종료
             if (_featureSet.FeatureType == FeatureType.Point)
             {
                 return;
             }
 
-            // Draw any completed parts first so that they are behind my active drawing content.
+            // 현재까지 완성 된 도형을 그려 활성 도면 내용 뒤에 그린디.
             if (_parts != null)
             {
                 GraphicsPath gp = new GraphicsPath();
@@ -311,6 +309,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                 foreach (List<Coordinate> part in _parts)
                 {
                     partPoints.AddRange(part.Select(c => Map.ProjToPixel(c)));
+
                     if (_featureSet.FeatureType == FeatureType.Line)
                     {
                         gp.AddLines(partPoints.ToArray());
@@ -324,7 +323,10 @@ namespace DotSpatial.Plugins.ShapeEditor
                     partPoints.Clear();
                 }
 
+                // 외곽선 그리기
                 e.Graphics.DrawPath(Pens.Blue, gp);
+
+                // 도형요소가 면이면 칠하기
                 if (_featureSet.FeatureType == FeatureType.Polygon)
                 {
                     Brush fill = new SolidBrush(Color.FromArgb(70, Color.LightCyan));
@@ -336,11 +338,14 @@ namespace DotSpatial.Plugins.ShapeEditor
             Pen bluePen = new Pen(Color.Blue, 2F);
             Pen redPen = new Pen(Color.Red, 3F);
             Brush redBrush = new SolidBrush(Color.Red);
+
             List<Point> points = new List<Point>();
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
             if (_coordinates != null)
             {
                 points.AddRange(_coordinates.Select(coord => Map.ProjToPixel(coord)));
+
                 foreach (Point pt in points)
                 {
                     e.Graphics.FillRectangle(redBrush, new Rectangle(pt.X - 2, pt.Y - 2, 4, 4));
@@ -366,6 +371,7 @@ namespace DotSpatial.Plugins.ShapeEditor
             bluePen.Dispose();
             redPen.Dispose();
             redBrush.Dispose();
+
             base.OnDraw(e);
         }
 

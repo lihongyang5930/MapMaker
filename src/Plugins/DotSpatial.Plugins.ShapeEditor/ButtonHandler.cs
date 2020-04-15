@@ -11,7 +11,7 @@ using DotSpatial.Symbology;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// Organizes how the buttons will be displayed and what happens when pressing different buttons.
+    /// 버튼 표시 방법과 버튼을 누를 때 발생하는 동작을 구성합니다.
     /// </summary>
     public class ButtonHandler : IDisposable
     {
@@ -19,21 +19,24 @@ namespace DotSpatial.Plugins.ShapeEditor
 
         private readonly IHeaderControl _header;
         private IFeatureLayer _activeLayer;
-        private SimpleActionItem _addShape;
+        private SimpleActionItem _newLayerBtn;
+        private SimpleActionItem _addShapeBtn;
+        private SimpleActionItem _moveVertexBtn;
+        private SimpleActionItem _snapTargetBtn;
         private AddShapeFunction _addShapeFunction;
+        private MoveVertexFunction _moveVertexFunction;
         private bool _disposed;
 
         private bool _doSnapping = true;
 
         private IMap _geoMap;
-        private MoveVertexFunction _moveVertexFunction;
 
         #endregion
 
         #region  Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ButtonHandler"/> class.
+        /// <see cref = "ButtonHandler"/> 클래스의 새 인스턴스를 초기화합니다.
         /// </summary>
         /// <param name="manager">The app manager.</param>
         public ButtonHandler(AppManager manager)
@@ -46,7 +49,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="ButtonHandler"/> class.
+        /// <see cref = "ButtonHandler"/> 클래스의 인스턴스를 마무리합니다.
         /// </summary>
         ~ButtonHandler()
         {
@@ -58,12 +61,12 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Properties
 
         /// <summary>
-        /// Gets a value indicating whether the "dispose" method has been called.
+        /// Gets "dispose"메소드가 호출되었는지 여부를 나타내는 값
         /// </summary>
         public bool IsDisposed => _disposed;
 
         /// <summary>
-        /// Gets or sets the 2D Geographic map to use with this feature editing toolkit.
+        /// Gets or sets 편집 대상 지도 속성
         /// </summary>
         public IMap Map
         {
@@ -94,8 +97,8 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Methods
 
         /// <summary>
-        /// Actually, this creates disposable items but doesn't own them.
-        /// When the ribbon disposes it will remove the items.
+        /// 실제로 이것은 일회용품을 만들지 만 소유하지는 않습니다.
+        /// 리본이 폐기되면 품목이 제거됩니다.
         /// </summary>
         public void Dispose()
         {
@@ -106,16 +109,14 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Disposes this handler, removing any buttons that it is responsible for adding.
+        /// 이 처리기를 삭제하여 추가를 담당하는 모든 단추를 제거합니다.
         /// </summary>
         /// <param name="disposeManagedResources">Disposes of the resources.</param>
         protected virtual void Dispose(bool disposeManagedResources)
         {
             if (!_disposed)
             {
-                // One option would be to leave the non-working tools,
-                // but if this gets disposed we should clean up after
-                // ourselves and remove any added controls.
+                // 추가 된 컨트롤을 제거합니다.
                 RemoveControls();
 
                 if (disposeManagedResources)
@@ -135,7 +136,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Sets up the handler to respond to buttons pressed on a ribbon or toolbar.
+        /// 추가된 도구 모음 버튼의 처리 핸들러를 설정합니다.
         /// </summary>
         private void AddButtons()
         {
@@ -144,31 +145,39 @@ namespace DotSpatial.Plugins.ShapeEditor
             // _Header.Add(new RootItem(ShapeEditorMenuKey, "Shape Editing"));
 
             //[20200401] fdragons - comments out
-            //_header.Add(new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.New, NewButtonClick)
-            //{
-            //    GroupCaption = "Shape Editor",
-            //    SmallImage = ShapeEditorResources.NewShapefile.ToBitmap(),
-            //    RootKey = HeaderControl.HomeRootItemKey
-            //});
-            _addShape = new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.Add_Shape, AddShapeButtonClick)
+            _newLayerBtn = new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.New, NewButtonClick)
+            {
+                GroupCaption = "Shape Editor",
+                SmallImage = ShapeEditorResources.NewShapefile.ToBitmap(),
+                RootKey = HeaderControl.HomeRootItemKey,
+            };
+            _header.Add(_newLayerBtn);
+
+            _addShapeBtn = new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.Add_Shape, AddShapeButtonClick)
             {
                 GroupCaption = "Shape Editor",
                 SmallImage = ShapeEditorResources.NewShape.ToBitmap(),
-                RootKey = HeaderControl.HomeRootItemKey
+                RootKey = HeaderControl.HomeRootItemKey,
+                Enabled = false,
             };
-            _header.Add(_addShape);
-            _header.Add(new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.Move_Vertex, MoveVertexButtonClick)
+            _header.Add(_addShapeBtn);
+
+            _moveVertexBtn = new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.Move_Vertex, MoveVertexButtonClick)
             {
                 GroupCaption = "Shape Editor",
                 SmallImage = ShapeEditorResources.move,
-                RootKey = HeaderControl.HomeRootItemKey
-            });
-            _header.Add(new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.Snapping, SnappingButtonClick)
+                RootKey = HeaderControl.HomeRootItemKey,
+                Enabled = false,
+            };
+            _header.Add(_moveVertexBtn);
+
+            _snapTargetBtn = new SimpleActionItem(ShapeEditorMenuKey, ShapeEditorResources.Snapping, SnappingButtonClick)
             {
                 GroupCaption = "Shape Editor",
                 SmallImage = ShapeEditorResources.SnappingIcon.ToBitmap(),
                 RootKey = HeaderControl.HomeRootItemKey
-            });
+            };
+            _header.Add(_snapTargetBtn);
         }
 
         /// <summary>
@@ -191,7 +200,7 @@ namespace DotSpatial.Plugins.ShapeEditor
 
             if (_activeLayer == null)
             {
-                MessageBox.Show("도형 생성을 위한 대상 레이어를 선택하여 주십시요.", "도형 신규 생성 및 추가");
+                MessageBox.Show("편집 대상 레이어를 선택하여 주십시요.");
                 return;
             }
 
@@ -210,43 +219,75 @@ namespace DotSpatial.Plugins.ShapeEditor
 
             _geoMap.FunctionMode = FunctionMode.None;
             _geoMap.Cursor = Cursors.Hand;
+
             UpdateAddShapeFunctionLayer();
             _addShapeFunction.Activate();
         }
 
+        /// <summary>
+        /// 범례에서 레이어를 선택하면, 편집 레이어로 설정한다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LayersLayerSelected(object sender, LayerSelectedEventArgs e)
         {
             SetActiveLayer(e.Layer);
         }
 
+        /// <summary>
+        /// 맵프레임에서 레이어를 선택하면, 편집 레이어로 설정한다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MapFrameLayerSelected(object sender, LayerSelectedEventArgs e)
         {
             if (!e.IsSelected && e.Layer == _activeLayer)
             {
                 _activeLayer = null;
-                _moveVertexFunction?.ClearSelection(); // changed by jany_ (2016-02-24) make sure highlighted features are reset too to prevent exception
+                
+                // 예외를 방지하기 위해 강조 표시된 상태를 재설정합니다.
+                _moveVertexFunction?.ClearSelection();
 
                 return;
             }
 
             _activeLayer = e.Layer as IFeatureLayer;
+
             if (_activeLayer == null)
             {
+                _addShapeBtn.Enabled = false;
+                _moveVertexBtn.Enabled = false;
+
                 return;
             }
 
+            // [20200409] fdragons
+            _geoMap.FunctionMode = FunctionMode.Pan;
+            _geoMap.Cursor = Cursors.Hand;
+
+            // 편집중인 도형이 널이 아니기 때문에 둘 다 업데이트한다.
             if (_moveVertexFunction != null)
                 UpdateMoveVertexFunctionLayer();
 
-            if (_addShapeFunction != null) // changed by jany_ (2016-02-24) update both because moveFeature might not be the active function just because it is not null
+            if (_addShapeFunction != null) 
                 UpdateAddShapeFunctionLayer();
         }
 
+        /// <summary>
+        /// 맵프레임에서 레이어가 삭제되면, 편집 레이어를 초기화한다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MapFrameOnLayerRemoved(object sender, LayerEventArgs e)
         {
             if (e.Layer == _activeLayer) _activeLayer = null;
         }
 
+        /// <summary>
+        /// 도형요소 구성좌표 편집하기, MoveVertexFunction을 Activate한다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoveVertexButtonClick(object sender, EventArgs e)
         {
             if (_geoMap == null)
@@ -254,11 +295,18 @@ namespace DotSpatial.Plugins.ShapeEditor
                 return;
             }
 
+            if (_geoMap.Layers.SelectedLayer != null)
+            {
+                _activeLayer = _geoMap.Layers.SelectedLayer as IFeatureLayer;
+            }
+
             if (_activeLayer == null)
             {
+                MessageBox.Show("편집 대상 레이어를 선택하여 주십시요.");
                 return;
             }
 
+            // 편집함수가 없으면 편집함수를 생성한다.
             if (_moveVertexFunction == null)
             {
                 _moveVertexFunction = new MoveVertexFunction(_geoMap)
@@ -267,6 +315,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                 };
             }
 
+            // 현재 맵 컨트롤에 편집함수를가 없으면, 생성한 편집함수를 추가한다.
             if (_geoMap.MapFunctions.Contains(_moveVertexFunction) == false)
             {
                 _geoMap.MapFunctions.Add(_moveVertexFunction);
@@ -274,19 +323,28 @@ namespace DotSpatial.Plugins.ShapeEditor
 
             _geoMap.FunctionMode = FunctionMode.None;
             _geoMap.Cursor = Cursors.Cross;
+
             _moveVertexFunction.Layer = _activeLayer;
+
             UpdateMoveVertexFunctionLayer();
             _moveVertexFunction.Activate();
         }
 
+        /// <summary>
+        /// 신규 레이어 생성하고, 편집레이어로 설정
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewButtonClick(object sender, EventArgs e)
         {
+            // 신규 레이어 명 및 도형요소 타입을 선택한다.
             FeatureTypeDialog dlg = new FeatureTypeDialog();
             if (dlg.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
+            // 도형요소 생성
             FeatureSet fs = new FeatureSet(dlg.FeatureType);
             if (_geoMap.Projection != null)
             {
@@ -295,6 +353,8 @@ namespace DotSpatial.Plugins.ShapeEditor
 
             fs.CoordinateType = dlg.CoordinateType;
             fs.IndexMode = false;
+
+            // 레이어 생성
             IMapFeatureLayer layer;
             if (!string.IsNullOrWhiteSpace(dlg.Filename))
             {
@@ -306,13 +366,14 @@ namespace DotSpatial.Plugins.ShapeEditor
                 layer = _geoMap.Layers.Add(fs);
             }
 
+            // 편집레이어로 설정
             layer.EditMode = true;
             _geoMap.Layers.SelectedLayer = layer;
             layer.LegendText = !string.IsNullOrEmpty(layer.DataSet.Name) ? layer.DataSet.Name : _geoMap.Layers.UnusedName("New Layer");
         }
 
         /// <summary>
-        /// Any controls that were added to display members will be removed.
+        /// 추가 된 모든 컨트롤을 제거합니다.
         /// </summary>
         private void RemoveControls()
         {
@@ -336,30 +397,41 @@ namespace DotSpatial.Plugins.ShapeEditor
 
         private void SetActiveLayer(ILayer layer)
         {
-            IFeatureLayer fl = layer as IFeatureLayer;
-            if (fl == null)
+            if (!(layer is IFeatureLayer fl))
             {
-                _addShape.Enabled = false;
+                _addShapeBtn.Enabled = false;
+                _moveVertexBtn.Enabled = false;
             }
             else
             {
                 _activeLayer = fl;
-                _addShape.Enabled = true;
+                _addShapeBtn.Enabled = true;
+                _moveVertexBtn.Enabled = true;
             }
         }
 
+        /// <summary>
+        /// 스냅 대상 레이어를 설정합니다.
+        /// </summary>
+        /// <param name="func"></param>
         private void SetSnapLayers(SnappableMapFunction func)
         {
             func.DoSnapping = _doSnapping;
             if (!_doSnapping)
                 return;
 
+            // 모든 레이어를 스냅 할 수 있도록 합니다.
             foreach (var fl in _geoMap.GetFeatureLayers())
             {
-                func.AddLayerToSnap(fl); // changed by jany_ (2016-02-24) allow all layers to be snapped because there seems to be no reason to exclude any of them
+                func.AddLayerToSnap(fl);
             }
         }
 
+        /// <summary>
+        /// 스냅 대상 레이어 선택 다이얼로그를 처리합니다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SnappingButtonClick(object sender, EventArgs e)
         {
             using (SnapSettingsDialog dlg = new SnapSettingsDialog(_geoMap)
@@ -372,7 +444,8 @@ namespace DotSpatial.Plugins.ShapeEditor
                     _doSnapping = dlg.DoSnapping;
                     if (_moveVertexFunction != null)
                     {
-                        _moveVertexFunction.DoSnapping = _doSnapping; // changed by jany_ (2016-02-24) update the snap settings of the functions without having to stop editing
+                        // 편집을 중단하지 않고 스냅 설정을 업데이트 합니다.
+                        _moveVertexFunction.DoSnapping = _doSnapping;
                         if (_doSnapping)
                         {
                             SetSnapLayers(_moveVertexFunction);
@@ -391,15 +464,22 @@ namespace DotSpatial.Plugins.ShapeEditor
             }
         }
 
+        /// <summary>
+        /// 활성 편집레이어를 설정하고, 스냅 레이어에 추가합니다.
+        /// </summary>
         private void UpdateAddShapeFunctionLayer()
         {
             _addShapeFunction.Layer = _activeLayer;
             SetSnapLayers(_addShapeFunction);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateMoveVertexFunctionLayer()
         {
-            _moveVertexFunction.ClearSelection(); // changed by jany_ (2016-02-24) make sure highlighted features are reset too to prevent exception
+            // 예외를 방지하기 위해 강조 표시된 도형요소도 재설정해야합니다
+            _moveVertexFunction.ClearSelection();
             _moveVertexFunction.Layer = _activeLayer;
             SetSnapLayers(_moveVertexFunction);
         }

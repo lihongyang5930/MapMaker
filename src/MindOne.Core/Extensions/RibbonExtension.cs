@@ -9,20 +9,24 @@ namespace MindOne.Core.Extensions
     {
         public static ToolStripTabItem AddTab(this RibbonControlAdv control, string text)
         {
-            var item = new ToolStripTabItem();
-            item.Text = text;
-            item.Font = Appearances.DefaultFont;
+            var item = new ToolStripTabItem
+            {
+                Text = text,
+                Font = Appearances.DefaultFont
+            };
             control.Header.AddMainItem(item);
             return item;
         }
         public static ToolStripEx AddGroup(this ToolStripTabItem parent, string text = null)
         {
-            var item = new ToolStripEx();
-            item.AutoSize  = true;
-            item.GripStyle = ToolStripGripStyle.Hidden;
-            item.CaptionFont = Appearances.DefaultFont;
-            item.Font        = Appearances.DefaultFont;
-            item.Text        = text;
+            var item = new ToolStripEx
+            {
+                AutoSize = true,
+                GripStyle = ToolStripGripStyle.Hidden,
+                CaptionFont = Appearances.DefaultFont,
+                Font = Appearances.DefaultFont,
+                Text = text
+            };
             parent.Panel.Controls.Add(item);
             return item;
         }
@@ -75,16 +79,20 @@ namespace MindOne.Core.Extensions
 
         public static ToolStripCheckBox AddCheckBox(this ToolStripPanelItem parent, string text)
         {
-            var item = new ToolStripCheckBox();
-            item.Text = text;
+            var item = new ToolStripCheckBox
+            {
+                Text = text
+            };
             parent.Items.Add(item);
             return item;
         }
      
         public static ToolStripComboBoxEx AddComboBox(this ToolStripPanelItem parent)
         {
-            var item = new ToolStripComboBoxEx();
-            item.Style = ToolStripExStyle.Office2016Colorful;
+            var item = new ToolStripComboBoxEx
+            {
+                Style = ToolStripExStyle.Office2016Colorful
+            };
             parent.Items.Add(item);
             return item;
             
@@ -114,8 +122,10 @@ namespace MindOne.Core.Extensions
         }
         public static ToolStripMenuItem AddDropDownItem(this ToolStripDropDownItem parent, string text)
         {
-            var item = new ToolStripMenuItem();
-            item.Text = text;
+            var item = new ToolStripMenuItem
+            {
+                Text = text
+            };
             parent.DropDownItems.Add(item);
             return item;
         }

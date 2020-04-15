@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-16"?>
+<root type="0">
+  <types>
+    <item key="0" value="System.Object[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="1" value="System.String[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="2" value="DotSpatial.Controls.Map, DotSpatial.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4d9e49339a7d240c" />
+    <item key="3" value="DotSpatial.Controls.MapFrame, DotSpatial.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4d9e49339a7d240c" />
+    <item key="4" value="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="5" value="DotSpatial.Data.Extent, DotSpatial.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c29dbf30e059ca9d" />
+    <item key="6" value="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="7" value="DotSpatial.Controls.MapLayerCollection, DotSpatial.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4d9e49339a7d240c" />
+    <item key="8" value="System.Collections.Generic.List`1[[DotSpatial.Symbology.ILayer, DotSpatial.Symbology, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6178c08da7998387]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="9" value="MMaker.Geographics.Layers.BackgroundLayer, MMaker.Geographics" />
+    <item key="10" value="DotSpatial.Symbology.ImageSymbolizer, DotSpatial.Symbology, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6178c08da7998387" />
+    <item key="11" value="System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="12" value="DotSpatial.Symbology.DynamicVisibilityMode, DotSpatial.Symbology, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6178c08da7998387" />
+    <item key="13" value="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <item key="14" value="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </types>
+  <item type="1" />
+  <item type="2">
+    <member name="MapFrame" type="3">
+      <member name="IsLegendGroup" type="4" value="False" />
+      <member name="ViewExtents" type="5">
+        <member name="MaxX" type="6" value="983089.304093495" />
+        <member name="MaxY" type="6" value="881427.718304529" />
+        <member name="MinX" type="6" value="-501008.597015803" />
+        <member name="MinY" type="6" value="-89456.6870618827" />
+      </member>
+      <member name="ExtendBuffer" type="4" value="False" />
+      <member name="Layers" type="7">
+        <member name="InnerList" type="8">
+          <item type="9">
+            <member name="IsLegendGroup" type="4" value="False" />
+            <member name="Symbolizer" type="10">
+              <member name="IsLegendGroup" type="4" value="False" />
+              <member name="Opacity" type="11" value="1" />
+              <member name="IsExpanded" type="4" value="False" />
+              <member name="LegendTextReadOnly" type="4" value="False" />
+            </member>
+            <member name="DynamicVisibilityMode" type="12" value="ZoomedIn" />
+            <member name="DynamicVisibilityWidth" type="6" value="0" />
+            <member name="IsVisible" type="4" value="True" />
+            <member name="SelectionEnabled" type="4" value="True" />
+            <member name="UseDynamicVisibility" type="4" value="False" />
+            <member name="IsExpanded" type="4" value="True" />
+            <member name="LegendTextReadOnly" type="4" value="False" />
+          </item>
+        </member>
+      </member>
+      <member name="ExtentsInitialized" type="4" value="True" />
+      <member name="DynamicVisibilityMode" type="12" value="ZoomedIn" />
+      <member name="DynamicVisibilityWidth" type="6" value="0" />
+      <member name="SelectionEnabled" type="4" value="False" />
+      <member name="UseDynamicVisibility" type="4" value="False" />
+      <member name="IsExpanded" type="4" value="True" />
+      <member name="LegendText" type="13" value="Map Layers" />
+      <member name="LegendTextReadOnly" type="4" value="False" />
+    </member>
+    <member name="ProjectionEsriString" type="13" value="GEOGCS[&amp;quot;GCS_WGS_1984&amp;quot;,DATUM[&amp;quot;D_WGS_1984&amp;quot;,SPHEROID[&amp;quot;WGS_1984&amp;quot;,6378137,298.257223562997]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433]]" />
+    <member name="ZoomOutFartherThanMaxExtent" type="4" value="False" />
+  </item>
+  <item type="14" />
+</root>

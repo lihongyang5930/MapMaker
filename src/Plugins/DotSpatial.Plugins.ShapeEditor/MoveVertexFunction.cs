@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using DotSpatial.Controls;
 using DotSpatial.Data;
@@ -16,15 +18,14 @@ using GeoAPI.Geometries;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// MoveVertexFunction works only with the actively selected layer in the legend.
-    /// MoveVertex requires clicking on a shape in order to first select the shape to work with.
-    /// Moving the mouse should highlight potential shapes for editing when not in edit mode.
-    /// Clicking on the shape establishes "edit mode" for that shape.
-    /// It should display all the vertices of the selected polygon in blue.
-    /// The mouse down on a vertex starts dragging.
-    /// but previous polygon location should be ok as well.
-    /// A right click during drag should cancel the movement if dragging.
-    /// A further right click will de-select the shape to edit.
+    /// MoveVertexFunction은 범례에서 활성으로 선택된 레이어를 대상으로 작동합니다.
+    /// MoveVertex는 먼저 작업 할 도형을 선택하기 위해 도형을 클릭해야합니다.
+    /// 마우스를 움직이면 편집 모드가 아닌 경우 편집 할 수있는 모양이 강조 표시됩니다.
+    /// 도형을 클릭하면 해당 도형에 대한 "편집 모드"가 설정됩니다.
+    /// 선택한 다각형의 모든 정점을 파란색으로 표시합니다.
+    /// 정점에서 마우스를 드래그하여 편집을 시작합니다.
+    /// 드래그하는 동안 마우스 오른쪽 버튼을 클릭하면 이동이 취소됩니다.
+    /// 마우스 오른쪽 버튼을 클릭하면 편집 할 모양이 선택 취소됩니다.
     /// </summary>
     public class MoveVertexFunction : SnappableMapFunction
     {
@@ -51,9 +52,9 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region  Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoveVertexFunction"/> class where the Map will be defined.
+        /// 지도가 정의 될 <see cref = "MoveVertexFunction"/> 클래스의 새 인스턴스를 초기화합니다.
         /// </summary>
-        /// <param name="map">The map control that implements the IMap interface.</param>
+        /// <param name="map">IMap 인터페이스를 구현하는 맵 컨트롤입니다.</param>
         public MoveVertexFunction(IMap map)
             : base(map)
         {
@@ -65,7 +66,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Events
 
         /// <summary>
-        /// Is raised after a vertex was moved.
+        /// 정점이 이동 된 후 발생합니다.
         /// </summary>
         public event EventHandler<VertexMovedEventArgs> VertextMoved;
 
@@ -74,7 +75,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Properties
 
         /// <summary>
-        /// Gets or sets the layer.
+        /// Gets or sets 편집대상 레이어
         /// </summary>
         public IFeatureLayer Layer
         {
@@ -96,7 +97,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Methods
 
         /// <summary>
-        /// Deselects the selected feature and removes the highlight from any highlighted feature.
+        /// 선택한 도형을 선택 취소하고 강조 표시된 기능에서 강조 표시를 제거합니다.
         /// </summary>
         public void ClearSelection()
         {
@@ -106,8 +107,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// This should be called if for some reason the layer gets un-selected or whatever so that the selection
-        /// should clear.
+        /// 어떤 이유로 레이어가 선택되지 않거나 선택 항목이 지워 져야하는 경우 호출해야합니다.
         /// </summary>
         public void DeselectFeature()
         {
@@ -117,12 +117,13 @@ namespace DotSpatial.Plugins.ShapeEditor
             }
 
             _selectedFeature = null;
+
             Map.MapFrame.Initialize();
             Map.Invalidate();
         }
 
         /// <summary>
-        /// Removes the highlighting from the actively highlighted feature.
+        /// 현재 강조 표시된 기능에서 강조 표시를 제거합니다.
         /// </summary>
         public void RemoveHighlightFromFeature()
         {
@@ -211,21 +212,23 @@ namespace DotSpatial.Plugins.ShapeEditor
                 }
                 else
                 {
+                    // 편집할 도형이 선택되어 있으면, 편집할 정점을 선택합니다.
                     if (_selectedFeature != null)
                     {
+                        // 정점 선택을 위한 영역을 설정합니다.
                         Rectangle mouseRect = new Rectangle(_mousePosition.X - 3, _mousePosition.Y - 3, 6, 6);
-
                         Envelope env = Map.PixelToProj(mouseRect).ToEnvelope();
 
+                        // 정점이 선택되었습니다.
                         if (CheckForVertexDrag(e))
                         {
                             return;
                         }
 
-                        // No vertex selection has occured.
+                        // 정점 선택이 발생하지 않았습니다.
                         if (!_selectedFeature.Geometry.Intersects(env.ToPolygon()))
                         {
-                            // We are clicking down outside of the given polygon, so clear our selected feature
+                            // 선택을 취소합니다.
                             DeselectFeature();
                             return;
                         }
@@ -233,14 +236,12 @@ namespace DotSpatial.Plugins.ShapeEditor
 
                     if (_activeFeature != null)
                     {
-                        // Don't start dragging a vertices right away for polygons and lines.
-                        // First you select the polygon, which displays the vertices, then they can be moved.
-                        if (_featureSet.FeatureType == FeatureType.Polygon)
+                        // 다각형과 선의 정점을 바로 드래그하지 마십시오. 먼저 정점을 표시하는 다각형을 선택한 다음 이동할 수 있습니다.
+                        if (_featureSet.FeatureType == FeatureType.Polygon) // 면
                         {
                             _selectedFeature = _activeFeature;
                             _activeFeature = null;
-                            IPolygonCategory sc = _selectedCategory as IPolygonCategory;
-                            if (sc == null)
+                            if (!(_selectedCategory is IPolygonCategory sc))
                             {
                                 _selectedCategory = new PolygonCategory(Color.FromArgb(55, 0, 255, 255), Color.Blue, 1)
                                 {
@@ -250,12 +251,11 @@ namespace DotSpatial.Plugins.ShapeEditor
 
                             _layer.SetCategory(_selectedFeature, _selectedCategory);
                         }
-                        else if (_featureSet.FeatureType == FeatureType.Line)
+                        else if (_featureSet.FeatureType == FeatureType.Line) // 선
                         {
                             _selectedFeature = _activeFeature;
                             _activeFeature = null;
-                            ILineCategory sc = _selectedCategory as ILineCategory;
-                            if (sc == null)
+                            if (!(_selectedCategory is ILineCategory sc))
                             {
                                 _selectedCategory = new LineCategory(Color.Cyan, 1)
                                 {
@@ -265,7 +265,7 @@ namespace DotSpatial.Plugins.ShapeEditor
 
                             _layer.SetCategory(_selectedFeature, _selectedCategory);
                         }
-                        else
+                        else // 점
                         {
                             _dragging = true;
                             Map.IsBusy = true;
@@ -273,11 +273,9 @@ namespace DotSpatial.Plugins.ShapeEditor
                             MapPointLayer mpl = _layer as MapPointLayer;
                             mpl?.SetVisible(_activeFeature, false);
 
-                            IPointCategory sc = _selectedCategory as IPointCategory;
-                            if (sc == null)
+                            if (!(_selectedCategory is IPointCategory sc))
                             {
-                                IPointSymbolizer ps = _layer.GetCategory(_activeFeature).Symbolizer.Copy() as IPointSymbolizer;
-                                if (ps != null)
+                                if (_layer.GetCategory(_activeFeature).Symbolizer.Copy() is IPointSymbolizer ps)
                                 {
                                     ps.SetFillColor(Color.Cyan);
                                     _selectedCategory = new PointCategory(ps);
@@ -298,16 +296,17 @@ namespace DotSpatial.Plugins.ShapeEditor
         protected override void OnMouseMove(GeoMouseArgs e)
         {
             _mousePosition = e.Location;
+
             if (_dragging)
             {
-                // Begin snapping changes
+                // 스냅 시작
                 Coordinate snappedCoord = e.GeographicLocation;
                 if (ComputeSnappedLocation(e, ref snappedCoord))
                 {
                     _mousePosition = Map.ProjToPixel(snappedCoord);
                 }
 
-                // End snapping changes
+                // 스냅 변경 적용
                 UpdateDragCoordinate(snappedCoord); // Snapping changes
             }
             else
@@ -318,8 +317,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                 }
                 else
                 {
-                    // Before a shape is selected it should be possible to highlight shapes to indicate which one
-                    // will be selected.
+                    // 도형을 선택하기 전에 도형을 강조 표시 할 수 있어야합니다. 어느 것을 선택해야하는지 나타냅니다.
                     bool requiresInvalidate = false;
                     if (_activeFeature != null)
                     {
@@ -343,8 +341,6 @@ namespace DotSpatial.Plugins.ShapeEditor
                         Map.Invalidate();
                     }
                 }
-
-                // check to see if the coordinates intersect with a shape in our current featureset.
             }
 
             base.OnMouseMove(e);
@@ -353,12 +349,20 @@ namespace DotSpatial.Plugins.ShapeEditor
         /// <inheritdoc />
         protected override void OnMouseUp(GeoMouseArgs e)
         {
+            // 이동증 마우스를 놓았을 놓았을때(위치이동결정시)
             if (e.Button == MouseButtons.Left && _dragging)
             {
+                // [20200414] fdragons - add user confirm
+                //if (DialogResult.OK != MessageBox.Show("이 위치로 이동 하시겠습니까?", "좌표이동", MessageBoxButtons.OKCancel))
+                //{
+                //    // [TODO] 이동 취소처리를 추가하여야 한다.
+                //}
                 _dragging = false;
                 Map.IsBusy = false;
+
                 _featureSet.InvalidateVertices();
 
+                // 점
                 if (_featureSet.FeatureType == FeatureType.Point || _featureSet.FeatureType == FeatureType.MultiPoint)
                 {
                     if (_activeFeature == null)
@@ -367,13 +371,14 @@ namespace DotSpatial.Plugins.ShapeEditor
                     }
 
                     OnVertexMoved(new VertexMovedEventArgs(_activeFeature));
+
                     if (_layer.GetCategory(_activeFeature) != _selectedCategory)
                     {
                         _layer.SetCategory(_activeFeature, _selectedCategory);
                         _layer.SetVisible(_activeFeature, true);
                     }
                 }
-                else
+                else // 선, 면
                 {
                     if (_selectedFeature == null)
                     {
@@ -381,6 +386,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                     }
 
                     OnVertexMoved(new VertexMovedEventArgs(_selectedFeature));
+
                     if (_layer.GetCategory(_selectedFeature) != _selectedCategory)
                     {
                         _layer.SetCategory(_selectedFeature, _selectedCategory);
@@ -392,11 +398,12 @@ namespace DotSpatial.Plugins.ShapeEditor
             base.OnMouseUp(e);
         }
 
+
         /// <summary>
-        /// This function checks to see if the current mouse location is over a vertex.
+        /// 이 함수는 현재 마우스 위치가 좌표점 위에 있는지 확인합니다.
         /// </summary>
-        /// <param name="e">The GeoMouseArgs parameter contains information about the mouse location and geographic coordinates.</param>
-        /// <returns>True, if the current mouse location is over a vertex.</returns>
+        /// <param name="e">GeoMouseArgs 매개 변수는 마우스 위치 및 지리적 좌표에 대한 정보를 포함합니다.</param>
+        /// <returns>True, 현재 마우스 위치가 정점 위에있는 경우</returns>
         private bool CheckForVertexDrag(GeoMouseArgs e)
         {
             Rectangle mouseRect = new Rectangle(_mousePosition.X - 3, _mousePosition.Y - 3, 6, 6);
@@ -488,7 +495,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Fires the VertexMoved event.
+        /// VertexMoved 이벤트를 발생시킵니다.
         /// </summary>
         /// <param name="e">The event args.</param>
         private void OnVertexMoved(VertexMovedEventArgs e)
@@ -497,31 +504,32 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Before a shape is selected, moving the mouse over a shape will highlight that shape by changing
-        /// its appearance. This tests features to determine the first feature to qualify as the highlight.
+        /// 도형을 선택하기 전에 도형 위로 마우스를 움직이면 모양을 변경하여 해당 도형이 강조 표시됩니다.
+        /// 이 기능을 테스트하여 가장 먼저 강조 할 기능을 결정합니다.
         /// </summary>
-        /// <param name="e">The GeoMouseArgs parameter contains information about the mouse location and geographic coordinates.</param>
-        /// <returns>A value indicating whether the shape was successfully highlighted.</returns>
+        /// <param name="e">GeoMouseArgs 매개 변수는 마우스 위치 및 지리적 좌표에 대한 정보를 포함합니다.</param>
+        /// <returns>도형이 성공적으로 강조 표시되었는지 여부를 나타내는 값입니다.</returns>
         private bool ShapeHighlight(GeoMouseArgs e)
         {
             if (e == null)
                 throw new ArgumentNullException(nameof(e), "e is null.");
 
+            // 검색영역으로 사용핳  6 X 6 사각형 폴리곤을 만든다.
             Rectangle mouseRect = new Rectangle(_mousePosition.X - 3, _mousePosition.Y - 3, 6, 6);
             Extent ext = Map.PixelToProj(mouseRect);
             IPolygon env = ext.ToEnvelope().ToPolygon();
+
             bool requiresInvalidate = false;
             foreach (IFeature feature in _featureSet.Features)
             {
+                // 도형요소(점) 검색
                 if (_featureSet.FeatureType == FeatureType.Point || _featureSet.FeatureType == FeatureType.MultiPoint)
                 {
-                    MapPointLayer mpl = _layer as MapPointLayer;
-                    if (mpl != null)
+                    if (_layer is MapPointLayer mpl)
                     {
                         int w = 3;
                         int h = 3;
-                        PointCategory pc = mpl.GetCategory(feature) as PointCategory;
-                        if (pc != null)
+                        if (mpl.GetCategory(feature) is PointCategory pc)
                         {
                             if (pc.Symbolizer.ScaleMode != ScaleMode.Geographic)
                             {
@@ -536,6 +544,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                         {
                             _activeFeature = feature;
                             _oldCategory = mpl.GetCategory(feature);
+
                             if (_selectedCategory == null)
                             {
                                 _selectedCategory = _oldCategory.Copy();
@@ -551,15 +560,16 @@ namespace DotSpatial.Plugins.ShapeEditor
                 }
                 else
                 {
+                    // 도형요소(선, 면) 검색
                     if (feature.Geometry.Intersects(env))
                     {
                         _activeFeature = feature;
                         _oldCategory = _layer.GetCategory(_activeFeature);
 
+                        // 폴리곤
                         if (_featureSet.FeatureType == FeatureType.Polygon)
                         {
-                            IPolygonCategory pc = _activeCategory as IPolygonCategory;
-                            if (pc == null)
+                            if (!(_activeCategory is IPolygonCategory pc))
                             {
                                 _activeCategory = new PolygonCategory(Color.FromArgb(55, 255, 0, 0), Color.Red, 1)
                                 {
@@ -568,10 +578,10 @@ namespace DotSpatial.Plugins.ShapeEditor
                             }
                         }
 
+                        // 라인
                         if (_featureSet.FeatureType == FeatureType.Line)
                         {
-                            ILineCategory pc = _activeCategory as ILineCategory;
-                            if (pc == null)
+                            if (!(_activeCategory is ILineCategory pc))
                             {
                                 _activeCategory = new LineCategory(Color.Red, 3)
                                 {
@@ -590,14 +600,13 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Highlighting shapes with a mouse over is something that also needs to be undone when the
-        /// mouse leaves. This test handles changing the colors back to normal when the mouse leaves a shape.
+        /// 마우스가 도형을 떠날 때 색상을 다시 정상으로 변경하는 것을 처리합니다.
         /// </summary>
-        /// <param name="e">The GeoMouseArgs parameter contains information about the mouse location and geographic coordinates.</param>
-        /// <returns>Boolean, true if mapframe initialize (or visual change) is necessary.</returns>
+        /// <param name="e">GeoMouseArgs 매개 변수는 마우스 위치 및 지리적 좌표에 대한 정보를 포함합니다.</param>
+        /// <returns>true,맵 프레임 다시그리기가 필요한 경우</returns>
         private bool ShapeRemoveHighlight(GeoMouseArgs e)
         {
-            // If no shapes have ever been highlighted, this is meaningless.
+            // 강조 표시된 모양이 없으면 의미가 없습니다.
             if (_oldCategory == null)
             {
                 return false;
@@ -605,15 +614,14 @@ namespace DotSpatial.Plugins.ShapeEditor
 
             Rectangle mouseRect = new Rectangle(_mousePosition.X - 3, _mousePosition.Y - 3, 6, 6);
             Extent ext = Map.PixelToProj(mouseRect);
-            MapPointLayer mpl = _layer as MapPointLayer;
+
             bool requiresInvalidate = false;
             IPolygon env = ext.ToEnvelope().ToPolygon();
-            if (mpl != null)
+            if (_layer is MapPointLayer mpl)
             {
                 int w = 3;
                 int h = 3;
-                PointCategory pc = mpl.GetCategory(_activeFeature) as PointCategory;
-                if (pc != null)
+                if (mpl.GetCategory(_activeFeature) is PointCategory pc)
                 {
                     if (pc.Symbolizer.ScaleMode != ScaleMode.Geographic)
                     {
@@ -626,6 +634,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                 if (!rect.Contains(Map.ProjToPixel(_activeFeature.Geometry.Coordinates[0])))
                 {
                     mpl.SetCategory(_activeFeature, _oldCategory);
+
                     _activeFeature = null;
                     requiresInvalidate = true;
                 }
@@ -635,6 +644,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                 if (!_activeFeature.Geometry.Intersects(env))
                 {
                     _layer.SetCategory(_activeFeature, _oldCategory);
+
                     _activeFeature = null;
                     requiresInvalidate = true;
                 }
@@ -643,11 +653,16 @@ namespace DotSpatial.Plugins.ShapeEditor
             return requiresInvalidate;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loc"></param>
         private void UpdateDragCoordinate(Coordinate loc)
         {
-            // Cannot change selected feature at this time because we are dragging a vertex
+            // 정점을 드래그하기 때문에 현재 선택한 도형은 변경할 수 없습니다
             _dragCoord.X = loc.X;
             _dragCoord.Y = loc.Y;
+
             if (_closedCircleCoord != null)
             {
                 _closedCircleCoord.X = loc.X;
@@ -657,11 +672,14 @@ namespace DotSpatial.Plugins.ShapeEditor
             Map.Invalidate();
         }
 
+        /// <summary>
+        /// 현재 마우스 위치의 정점을 편집 대상 좌표로 설정합니다.
+        /// </summary>
         private void VertexHighlight()
         {
-            // The feature is selected so color vertex that can be moved but don't highlight other shapes.
             Rectangle mouseRect = new Rectangle(_mousePosition.X - 3, _mousePosition.Y - 3, 6, 6);
             Extent ext = Map.PixelToProj(mouseRect);
+
             if (_activeVertex != null && !ext.Contains(_activeVertex))
             {
                 _activeVertex = null;

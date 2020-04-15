@@ -65,7 +65,7 @@
             this.ribbonControlAdv1.QuickPanelImageLayout = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ribbonControlAdv1.RibbonHeaderImage = Syncfusion.Windows.Forms.Tools.RibbonHeaderImage.None;
             this.ribbonControlAdv1.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
-            this.ribbonControlAdv1.SelectedTab = this.rbFile;
+            this.ribbonControlAdv1.SelectedTab = this.rbMap;
             this.ribbonControlAdv1.ShowLauncher = false;
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
@@ -187,6 +187,7 @@
             this.ribbonControlAdv1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockingManager)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

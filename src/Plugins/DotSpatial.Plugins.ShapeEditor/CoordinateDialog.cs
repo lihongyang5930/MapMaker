@@ -10,7 +10,7 @@ using GeoAPI.Geometries;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// A dialog that displays the coordinates while drawing shapes.
+    /// 도형을 그리는 동안 좌표를 표시하는 대화 상자
     /// </summary>
     public partial class CoordinateDialog : Form
     {
@@ -23,7 +23,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region  Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CoordinateDialog"/> class.
+        /// <see cref = "CoordinateDialog"/> 클래스의 새 인스턴스를 초기화
         /// </summary>
         public CoordinateDialog()
         {
@@ -37,7 +37,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Events
 
         /// <summary>
-        /// Occurs when the ok button is clicked.
+        /// 확인 버튼을 클릭하면 발생합니다.
         /// </summary>
         public event EventHandler CoordinateAdded;
 
@@ -46,7 +46,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Properties
 
         /// <summary>
-        /// Gets a coordinate based on the current values.
+        /// Gets 현재의 값에 근거한 좌표
         /// </summary>
         public Coordinate Coordinate
         {
@@ -79,7 +79,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether or not to show M values.
+        /// Gets or sets M 값을 표시할지를 나타내는 값
         /// </summary>
         public bool ShowMValues
         {
@@ -109,7 +109,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether or not to show Z values.
+        /// Gets or sets Z 값을 표시할지를 나타내는 값
         /// </summary>
         public bool ShowZValues
         {
@@ -193,9 +193,9 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Methods
 
         /// <summary>
-        /// Prevents disposing this form when the user closes it.
+        /// 사용자가 양식을 닫을 때이 양식을 폐기하지 않고 숨긴다.
         /// </summary>
-        /// <param name="e">The CancelEventArgs parameter allows canceling the complete closure of this dialog.</param>
+        /// <param name="e">CancelEventArgs 매개 변수를 사용하면이 대화 상자를 완전히 닫을 수 있습니다.</param>
         protected override void OnClosing(CancelEventArgs e)
         {
             Hide();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Syncfusion.Windows.Forms.Chart;
@@ -21,7 +22,8 @@ namespace MindOne.Core.Services
         {
             foreach (TabPageAdv page in tabControl.TabPages)
             {
-                
+                // [20200415] fdragons
+                Trace.WriteLine($"static class Appearances TagControl({page.Name})");
             }
         }
 
@@ -73,7 +75,6 @@ namespace MindOne.Core.Services
             if (image != null)
                 button.Image = image;
         }
-
 
         private static void SetDefaultFont(Control control)
         {

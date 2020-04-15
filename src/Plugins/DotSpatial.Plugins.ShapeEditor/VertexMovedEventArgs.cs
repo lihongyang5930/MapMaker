@@ -7,16 +7,16 @@ using DotSpatial.Data;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// The arguments for the VertexMoved event.
+    /// VertexMoved 이벤트에 대한 인수입니다.
     /// </summary>
     public class VertexMovedEventArgs : EventArgs
     {
         #region  Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VertexMovedEventArgs"/> class.
+        /// <see cref = "VertexMovedEventArgs"/> 클래스의 새 인스턴스를 초기화합니다.
         /// </summary>
-        /// <param name="affectedFeature">The feature affected by the vertex move.</param>
+        /// <param name="affectedFeature">정점 이동의 영향을받는 도형요소</param>
         public VertexMovedEventArgs(IFeature affectedFeature)
         {
             AffectedFeature = affectedFeature;
@@ -27,7 +27,7 @@ namespace DotSpatial.Plugins.ShapeEditor
         #region Properties
 
         /// <summary>
-        /// Gets or sets the affected feature.
+        /// Gets or sets 편집 영향을받는 도형요소
         /// </summary>
         public IFeature AffectedFeature { get; set; }
 

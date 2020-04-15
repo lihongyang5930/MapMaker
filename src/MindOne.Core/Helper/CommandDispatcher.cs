@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MindOne.Core.Helper
@@ -28,9 +25,9 @@ namespace MindOne.Core.Helper
                 return true;
             }
 
-            Debug.Print("Command not found: " + itemName);
+            Trace.WriteLine($"Command not found: { itemName }");
 
-            if(item is ToolStripDropDownItem menu && menu.DropDownItems.Count > 0)
+            if (item is ToolStripDropDownItem menu && menu.DropDownItems.Count > 0)
                 return false;
 
             if (item is ToolStripSeparator) return false;
@@ -56,7 +53,7 @@ namespace MindOne.Core.Helper
                 if (item.Tag == null)
                     item.Click += ItemClick;
 
-                if(item is ToolStripDropDownItem menuItem)
+                if (item is ToolStripDropDownItem menuItem)
                 {
                     InitMenu(menuItem.DropDownItems);
                 }
@@ -68,7 +65,7 @@ namespace MindOne.Core.Helper
         /// </summary>
         private void ItemClick(object sender, EventArgs e)
         {
-            if(!(sender is ToolStripItem item))
+            if (!(sender is ToolStripItem item))
                 return;
 
             var command = Activator.CreateInstance<T>();

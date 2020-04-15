@@ -87,6 +87,11 @@ namespace MMaker.Diagnosis.Helper
 
             //}
 
+            if (sbr.Count < 1)
+            {
+                MessageBox.Show("쿼리결과가 없습니다.", "진행중...");
+                return;
+            }
             Clipboard.SetText(string.Join(Environment.NewLine, sbr.Cast<object>().Select(o => o.ToString()).ToArray()));
             //var db = new DpfContext(connectionString);
             //var pipes = db.DBM_PIPE.Where(x => x.PP_CLASS == "상수관로").ToArray();

@@ -12,14 +12,14 @@ using GeoAPI.Geometries;
 namespace DotSpatial.Plugins.ShapeEditor
 {
     /// <summary>
-    /// This is an abtract class that provides functionality for snapping objects.
+    /// 이것은 객체 스냅 기능을 제공하는 추상 클래스입니다.
     /// </summary>
     public abstract class SnappableMapFunction : MapFunctionZoom
     {
         #region  Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SnappableMapFunction"/> class.
+        /// <see cref = "SnappableMapFunction"/> 클래스의 새 인스턴스를 초기화합니다.
         /// </summary>
         /// <param name="map">The map.</param>
         protected SnappableMapFunction(IMap map)

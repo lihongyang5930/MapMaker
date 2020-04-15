@@ -7,13 +7,13 @@ namespace MMaker.Core.Helper
 {
     public class RibbonManager
     {
+        public RibbonControlAdv RibbonControl { get; private set; }
+
         public RibbonManager(RibbonControlAdv ribbonControl)
         {
             RibbonControl = ribbonControl;
             Appearances.MainRibbon(ribbonControl);
         }
-
-        public RibbonControlAdv RibbonControl { get; private set; }
 
         public void InitializeMenu()
         {

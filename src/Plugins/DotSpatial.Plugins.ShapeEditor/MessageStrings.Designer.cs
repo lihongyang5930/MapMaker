@@ -97,7 +97,7 @@ namespace DotSpatial.Plugins.ShapeEditor {
         }
         
         /// <summary>
-        ///   The entered value is invalid because it can&apos;t be converted into a double precision floating point number.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   입력 한 값이 배정 밀도 부동 소수점 숫자로 변환 될 수 없으므로 유효하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string DoubleParseException {
             get {
@@ -106,7 +106,7 @@ namespace DotSpatial.Plugins.ShapeEditor {
         }
         
         /// <summary>
-        ///   A HeaderControl must be available through the AppManager.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   HeaderControl은 AppManager를 통해 사용 해야합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string HeaderControlMustBeAvailable {
             get {
@@ -115,7 +115,7 @@ namespace DotSpatial.Plugins.ShapeEditor {
         }
         
         /// <summary>
-        ///   Please select a layer before attempting to use this feature.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   이 기능을 사용하기 전에 레이어를 선택하십시오.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string SelectLayerError {
             get {

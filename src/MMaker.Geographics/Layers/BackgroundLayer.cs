@@ -149,7 +149,7 @@ namespace MMaker.Geographics.Layers
                     min = new PointF((float)Math.Round(min.X), (float)Math.Round(min.Y));
                     max = new PointF((float)Math.Round(max.X), (float)Math.Round(max.Y));
 
-                    ColorMatrix matrix = new ColorMatrix { Matrix33 = 0.65f }; // Symbolizer.Opacity
+                    ColorMatrix matrix = new ColorMatrix { Matrix33 = 0.45f }; // Symbolizer.Opacity
                     using (var attributes = new ImageAttributes())
                     {
                         attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);

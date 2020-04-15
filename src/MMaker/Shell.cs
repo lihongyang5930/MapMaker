@@ -152,8 +152,7 @@ namespace MMaker
         /// <param name="e"></param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            DialogResult ret = MessageBox.Show("시스템을"
-                + "\n종료하시겠습니까 ?"
+            DialogResult ret = MessageBox.Show("시스템을 종료하시겠습니까?"
                 , AppTitle, 
                 MessageBoxButtons.YesNo);
 

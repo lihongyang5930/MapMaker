@@ -62,37 +62,39 @@ namespace MMaker.Geographics.Layers
                 타일주소의 직접 호출은 당사가 허용하는 방법이 아닙니다.
                 따라서 일시적으로 가능하다 하더라도 지속적인 정상 서비스를 보장하지 않습니다.
 
-            "일반지도1807"                    "http://map{s}.daumcdn.net/map_2d/1807hsm/L{z}/{y}/{x}.png"                   
-            "일반지도1906"                    "http://map{s}.daumcdn.net/map_2d/1906plw/L{z}/{y}/{x}.png"                   
-            "지적편집도(Cadastral)"           "http://map{s}.daumcdn.net/map_usedistrict/1807hsm/L{z}/{y}/{x}.png"          
-            "법정동경계지도(BBoundary)"       "http://boundary.map.daum.net/mapserver/db/BBOUN_L/L{z}/{y}/{x}.png"          
-            "행정동경계지도 HBoundary"        "http://boundary.map.daum.net/mapserver/db/HBOUN_L/L{z}/{y}/{x}.png"          
-            "지형도(Terrain Map)"             "http://map{s}.daumcdn.net/map_shaded_relief/3.00/L{z}/{y}/{x}.png"           
-            "위성지도+라벨 중첩지도)"         "http://map{s}.daumcdn.net/map_hybrid/1807hsm/L{z}/{y}/{x}.png"               
-            "위성지도(Satellite Only)"        "http://map{s}.daumcdn.net/map_skyview/L{z}/{y}/{x}.jpg?v=160114"             
-            "자전거도로지도(Bicycle)"         "http://map{s}.daumcdn.net/map_bicycle/2d/6.00/L{z}/{y}/{x}.png"              
-            "교통상황지도(Traffic)"           "http://r{s}.maps.daum-img.net/mapserver/file/realtimeroad/L{z}/{y}/{x}.png"  
-            "로드뷰"                          "http://map{s}.daumcdn.net/map_roadviewline/7.00/L{z}/{y}/{x}.png"            
-            "미세먼지지도"                    "http://airinfo.map.kakao.com/mapserver/file/airinfo_pm10/T/L{z}/{y}/{x}.png" 
-            "황사지도"                        "http://airinfo.map.kakao.com/mapserver/file/airinfo_ysnd/T/L{z}/{y}/{x}.png" 
-            "이산화질소지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_no2/T/L{z}/{y}/{x}.png"  
-            "아황산가스지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_so2/T/L{z}/{y}/{x}.png"  
-            "통합대기지수지도"                "http://airinfo.map.kakao.com/mapserver/file/airinfo_khai/T/L{z}/{y}/{x}.png" 
-            "초미세먼지지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_pm25/T/L{z}/{y}/{x}.png" 
-            "오존지도"                        "http://airinfo.map.kakao.com/mapserver/file/airinfo_o3/T/L{z}/{y}/{x}.png"   
-            "일산화탄소지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_co/T/L{z}/{y}/{x}.png"   
+                "일반지도1807"                    "http://map{s}.daumcdn.net/map_2d/1807hsm/L{z}/{y}/{x}.png"                   
+                "일반지도1906"                    "http://map{s}.daumcdn.net/map_2d/1906plw/L{z}/{y}/{x}.png"                   
+                "지적편집도(Cadastral)"           "http://map{s}.daumcdn.net/map_usedistrict/1807hsm/L{z}/{y}/{x}.png"          
+                "법정동경계지도(BBoundary)"       "http://boundary.map.daum.net/mapserver/db/BBOUN_L/L{z}/{y}/{x}.png"          
+                "행정동경계지도 HBoundary"        "http://boundary.map.daum.net/mapserver/db/HBOUN_L/L{z}/{y}/{x}.png"          
+                "지형도(Terrain Map)"             "http://map{s}.daumcdn.net/map_shaded_relief/3.00/L{z}/{y}/{x}.png"           
+                "위성지도+라벨 중첩지도)"         "http://map{s}.daumcdn.net/map_hybrid/1807hsm/L{z}/{y}/{x}.png"               
+                "위성지도(Satellite Only)"        "http://map{s}.daumcdn.net/map_skyview/L{z}/{y}/{x}.jpg?v=160114"             
+                "자전거도로지도(Bicycle)"         "http://map{s}.daumcdn.net/map_bicycle/2d/6.00/L{z}/{y}/{x}.png"              
+                "교통상황지도(Traffic)"           "http://r{s}.maps.daum-img.net/mapserver/file/realtimeroad/L{z}/{y}/{x}.png"  
+                "로드뷰"                          "http://map{s}.daumcdn.net/map_roadviewline/7.00/L{z}/{y}/{x}.png"            
+                "미세먼지지도"                    "http://airinfo.map.kakao.com/mapserver/file/airinfo_pm10/T/L{z}/{y}/{x}.png" 
+                "황사지도"                        "http://airinfo.map.kakao.com/mapserver/file/airinfo_ysnd/T/L{z}/{y}/{x}.png" 
+                "이산화질소지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_no2/T/L{z}/{y}/{x}.png"  
+                "아황산가스지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_so2/T/L{z}/{y}/{x}.png"  
+                "통합대기지수지도"                "http://airinfo.map.kakao.com/mapserver/file/airinfo_khai/T/L{z}/{y}/{x}.png" 
+                "초미세먼지지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_pm25/T/L{z}/{y}/{x}.png" 
+                "오존지도"                        "http://airinfo.map.kakao.com/mapserver/file/airinfo_o3/T/L{z}/{y}/{x}.png"   
+                "일산화탄소지도"                  "http://airinfo.map.kakao.com/mapserver/file/airinfo_co/T/L{z}/{y}/{x}.png"   
             */
         }
         public Task<BackgroundLayerSet> GetKWater()
         {
             var baseUrl = "http://kommap.kwater.or.kr/arcgis/rest/services/public/BaseMap_2018/MapServer";
-            var schema  = new TileSchema();
-            schema.OriginX  = -5423200;
-            schema.OriginY  =  6294600;
-            schema.Format   = "image/jpgpng";
-            schema.YAxis    = YAxis.OSM;
-            schema.Srs      = "EPSG:5181";
-            schema.Extent   = new Extent(-956717.4541277827, -341633.6944546023, 1690051.884713592, 1587544.6432406649);
+            var schema = new TileSchema
+            {
+                OriginX = -5423200,
+                OriginY = 6294600,
+                Format = "image/jpgpng",
+                YAxis = YAxis.OSM,
+                Srs = "EPSG:5181",
+                Extent = new Extent(-956717.4541277827, -341633.6944546023, 1690051.884713592, 1587544.6432406649)
+            };
             schema.Resolutions[ "0"] =  new Resolution(id:  "0", unitsPerPixel:   926.0435187537042       , scaledenominator: 3500000);
             schema.Resolutions[ "1"] =  new Resolution(id:  "1", unitsPerPixel:   529.1677250021168       , scaledenominator: 2000000);
             schema.Resolutions[ "2"] =  new Resolution(id:  "2", unitsPerPixel:   264.5838625010584       , scaledenominator: 1000000);
@@ -121,26 +123,30 @@ namespace MMaker.Geographics.Layers
             var tileSource    = new TileSource(provider, schema);
 
             //var set        = new BackgroundLayerSet(new [] { new BackgroundLayer(tileSource, "일반", order: 0) });
-            var set = new BackgroundLayerSet(new[] { new BackgroundLayer(tileSource, null) { LegendText = "일반"} });
-            set.Add("없음");
-            set.Add("일반"      , "일반");
+            var set = new BackgroundLayerSet(new[] { new BackgroundLayer(tileSource, null) { LegendText = "일반" } })
+            {
+                "없음",
+                { "일반", "일반" }
+            };
             return Task.FromResult(set);
         }
 
         private static TileSchema GetKakaomapSchema()
         {
-            var schema      = new TileSchema();
-            schema.OriginX  = -30000;
-            schema.OriginY  = -60000;
-            schema.Name     = "KakaoMap";
-            schema.Format   = "png";
-            schema.YAxis    = YAxis.TMS;
-            schema.Srs      = "EPSG:5181";
+            var schema = new TileSchema
+            {
+                OriginX = -30000,
+                OriginY = -60000,
+                Name = "KakaoMap",
+                Format = "png",
+                YAxis = YAxis.TMS,
+                Srs = "EPSG:5181"
+            };
 
-            var minX = -219825.99;
-            var minY = -535028.96;
-            var maxX =  819486.07;
-            var maxY =  777525.22;
+            var minX = -605706;
+            var maxX = 1202287;
+            var minY =  -37859;
+            var maxY = 1160527;
             schema.Extent   = new Extent(minX, minY, maxX, maxY);
             var resolutions = new[] { 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25 };
             SetResolution(schema, firstLevel: 1, isReversed: true, resolutions: resolutions);
@@ -156,14 +162,12 @@ namespace MMaker.Geographics.Layers
         {
             return sources
                         .Where(selector)
-                        //.Select(x => new BackgroundLayer(x, x.Name, order: orderer.Invoke(x)))
                         .Select(x => new BackgroundLayer(x, null) {LegendText = x.Name })
                         .ToArray();
         }
         private static BackgroundLayer[] GetTileLayers(ITileSource[] sources)
         {
             return sources
-                        //.Select(x => new BackgroundLayer(x, x.Name, order: Array.IndexOf(sources, x)))
                         .Select(x => new BackgroundLayer(x, null) { LegendText = x.Name })
                         .ToArray();
         }

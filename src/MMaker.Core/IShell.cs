@@ -29,6 +29,7 @@ namespace MMaker.Core
         Form MainForm { get; }
         MapView MapView { get; set; }
         LegendView LegendView { get; set; }
+        object Controller { get; }
 
         void RefreshUI();
     }

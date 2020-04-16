@@ -54,6 +54,7 @@ namespace MMaker
         //[20200330] fdragons : comment out fallowing two lines for using DotSpatial components
         public MapView          MapView { get; set; }
         public LegendView       LegendView { get; set; }
+        public object           Controller { get => _controller; }
 
         public MmakerShell(AppEnvironment environment, DialogService dialog, ViewService views)
         {
@@ -84,10 +85,10 @@ namespace MMaker
 
         public async Task Initialize()
         {
-            this._controller = new DiagnosisController(this);
+            _controller = new DiagnosisController(this);
             await _controller.Initialize();
-
         }
+
         public IDisposable PleaseWait()
         {
             return PleaseWait("잠시만 기다려 주세요...");

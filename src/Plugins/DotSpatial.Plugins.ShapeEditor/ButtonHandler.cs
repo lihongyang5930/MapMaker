@@ -45,6 +45,7 @@ namespace DotSpatial.Plugins.ShapeEditor
                 throw new ArgumentNullException(nameof(manager), MessageStrings.HeaderControlMustBeAvailable);
 
             _header = manager.HeaderControl;
+
             AddButtons();
         }
 

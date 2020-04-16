@@ -7,10 +7,17 @@ namespace MindOne.Core.Helper
 {
     public abstract class CommandDispatcher<T> where T : struct, IConvertible
     {
+        /// <summary>
+        /// 툴 스트립 아이템 명으로부터 명령어 문자열을 구한다.((예, mnuEditStart => EditStart)
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public bool CommandFromName(ToolStripItem item, ref T command)
         {
             string itemName = item.Name;
             itemName = itemName.ToLower();
+
             var prefixes = new[] { "tool", "mnu" };
             foreach (var prefix in prefixes)
             {
@@ -50,6 +57,8 @@ namespace MindOne.Core.Helper
 
             foreach (ToolStripItem item in items)
             {
+                Trace.WriteLine($"\tToolStripItem - {item.Name}");
+
                 if (item.Tag == null)
                     item.Click += ItemClick;
 
@@ -70,7 +79,10 @@ namespace MindOne.Core.Helper
 
             var command = Activator.CreateInstance<T>();
             if (CommandFromName(item, ref command))
+            {
+                Trace.WriteLine($"Run command: {command}");
                 Run(command);
+            }
         }
     }
 }

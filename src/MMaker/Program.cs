@@ -59,19 +59,14 @@ namespace MMaker
                 var views = new ViewService();
                 var shell = new MmakerShell(environment, dialog, views);
                 Log.Logger.Information($"Initialized ({(DateTime.Now - appStartTime).TotalSeconds} sec)");
-
                 Log.Logger.Information("Start MapMaker");
+
                 Application.Run(shell);
             }
             catch (Exception ex)
             {
-#if DEBUG
                 Trace.WriteLine(ex.Message);
                 Trace.WriteLine(ex.StackTrace.Split('\n')[0]);
-#endif         
-                Log.Logger.Error(ex.Message);
-                Log.Logger.Error(ex.StackTrace.Split('\n')[0]);
-
                 throw ex;
             }
             finally

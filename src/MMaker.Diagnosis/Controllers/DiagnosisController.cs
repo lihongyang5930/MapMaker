@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,14 +20,15 @@ namespace MMaker.Diagnosis.Controllers
 
         private BackgroundLayerSet layerSet;
 
+        public BackgroundLayerSet BackgroundLayer { get => layerSet; }
+
         public DiagnosisController(IShell shell) : base()
         {
-            this.MmakerShell = shell;
+            MmakerShell = shell;
 
-            _dispatcher.MmakerShell = this.MmakerShell;
-
-            LayerHelper.MmakerShell = this.MmakerShell;
-            MapHelper.MmakerShell = this.MmakerShell;
+            _dispatcher.MmakerShell = MmakerShell;
+            LayerHelper.MmakerShell = MmakerShell;
+            MapHelper.MmakerShell   = MmakerShell;
         }
 
         public override async Task Initialize()
@@ -34,8 +36,14 @@ namespace MMaker.Diagnosis.Controllers
             MmakerShell.RibbonManager.InitializeMenu();
 
             foreach (var tab in MmakerShell.RibbonManager.RibbonControl.Header.MainItems.Cast<ToolStripTabItem>())
+            {
+                Trace.WriteLine($"MmakerShell.RibbonManager.RibbonControl.Header.MainItems - {tab.Name}");
                 foreach (var Ex in tab.Panel.Controls.Cast<ToolStripEx>())
+                {
+                    Trace.WriteLine($"\ttab.Panel.Controls - {Ex.Items.Count}");
                     _dispatcher.InitMenu(Ex.Items);
+                }
+            }
 
             // generate background layer (using kakaomap)
             var backgroundLayerFactory = new BackgroundLayerFactory();
@@ -52,9 +60,13 @@ namespace MMaker.Diagnosis.Controllers
             MmakerShell.LegendView = new Geographics.Controls.LegendView() { Visible = false };
             MmakerShell.MapView = new Geographics.Controls.MapView() { Visible = false };
 
-            // [20200406] fdragons
-            // make background layer (using kakaomap)
-            BackgroundLayer backlayer = layerSet.Layers.ElementAt(0); // 0:map_2d, 1:map_skyview, 2:map_hybrid
+            ResetBackgroundLayer();
+        }
+
+        public void ResetBackgroundLayer()
+        {
+            // [20200406] fdragons - make background layer (using kakaomap)
+            BackgroundLayer backlayer = BackgroundLayer.Layers.ElementAt(0); // 0:map_2d, 1:map_skyview, 2:map_hybrid
             backlayer.IsVisible = true;
             MmakerShell.AppManager.Map.Layers.Add(backlayer);
         }

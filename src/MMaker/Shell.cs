@@ -56,6 +56,12 @@ namespace MMaker
         public LegendView       LegendView { get; set; }
         public object           Controller { get => _controller; }
 
+        /// <summary>
+        /// MapMaker 셀 생성자 함수
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <param name="dialog"></param>
+        /// <param name="views"></param>
         public MmakerShell(AppEnvironment environment, DialogService dialog, ViewService views)
         {
             //[20200319]fdragons - for Trace

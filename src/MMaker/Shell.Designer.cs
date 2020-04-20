@@ -69,7 +69,7 @@
             this.ribbonControlAdv1.ShowLauncher = false;
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
-            this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = false;
+            this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = true;
             this.ribbonControlAdv1.Size = new System.Drawing.Size(1019, 190);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
@@ -77,6 +77,7 @@
             this.ribbonControlAdv1.Text = "ribbonControlAdv1";
             this.ribbonControlAdv1.ThemeName = "Office2016";
             this.ribbonControlAdv1.TitleColor = System.Drawing.Color.Black;
+            this.ribbonControlAdv1.UseTouchStyleArrowColor = true;
             // 
             // rbFile
             // 

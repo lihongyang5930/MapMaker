@@ -4,7 +4,7 @@ namespace MindOne.Core.Helper
 {
     public static class MessageHelper
     {
-        public static string APP_NAME = "MapMaker v2.0";
+        public static string APP_NAME = "MapMaker v2.0.1";
 
         public static void Info(string msg)
         {

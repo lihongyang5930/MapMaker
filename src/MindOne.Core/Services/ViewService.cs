@@ -23,12 +23,14 @@ namespace MindOne.Core.Services
             var type = view.GetType();
             if (_views.ContainsKey(type))
                 return;
+
             _views.Add(type, view);
         }
         public TView GetView<TView>() where TView : Control
         {
             if (!_views.ContainsKey(typeof(TView)))
                 Register(CreateInstance<TView>());
+
             return (TView)_views[typeof(TView)];
         }
 
@@ -36,7 +38,6 @@ namespace MindOne.Core.Services
         {
             if (!_views.ContainsKey(typeof(TView)))
                 Register(CreateInstance<TView>(args));
-
 
             return (TView)_views[typeof(TView)];
         }
@@ -46,21 +47,21 @@ namespace MindOne.Core.Services
             return (TView)Activator.CreateInstance(typeof(TView), args: args);
         }
 
-        public DialogResult ShowDialog<TControl>(TControl view, string title = "MapMaker v2.0")
+        public DialogResult ShowDialog<TControl>(TControl view, string title = "MapMaker v2.0.1")
             where TControl : UserControl
         {
             var frm  = GetDialogForm(view, title);
             frm.ShowDialog();
             return frm.DialogResult;
         }
-        public DialogResult ShowFixedDialog<TControl>(TControl view, string title = "MapMaker v2.0")
+        public DialogResult ShowFixedDialog<TControl>(TControl view, string title = "MapMaker v2.0.1")
             where TControl : UserControl
         {
             var frm  = GetDialogForm(view, title);
             frm.ShowDialog();
             return frm.DialogResult;
         }
-        private void ShowFixedDialog<TForm, TControl>(TForm frm, TControl view, string title = "MapMaker v2.0")
+        private void ShowFixedDialog<TForm, TControl>(TForm frm, TControl view, string title = "MapMaker v2.0.1")
             where TForm : Form
             where TControl : UserControl
         {
@@ -77,7 +78,7 @@ namespace MindOne.Core.Services
             frm.Controls.Add(view);
             frm.ShowDialog();
         }
-        private DialogForm GetDialogForm(UserControl view, string title = "MapMaker v2.0")
+        private DialogForm GetDialogForm(UserControl view, string title = "MapMaker v2.0.1")
         {
             view.Dock = DockStyle.Fill;
 

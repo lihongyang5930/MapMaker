@@ -52,9 +52,9 @@ namespace MMaker
             try
             {
                 var dialog = new DialogService(
-                             messageBoxTitle: "MapMaker v2.0",
-                             openTitle: "열기 - MapMaker v2.0",
-                             saveTitle: "저장 - MapMaker v2.0",
+                             messageBoxTitle: "MapMaker v2.0.1",
+                             openTitle: "열기 - MapMaker v2.0.1",
+                             saveTitle: "저장 - MapMaker v2.0.1",
                              defaultDirectory: environment.DialogDefaultDirectory);
                 var views = new ViewService();
                 var shell = new MmakerShell(environment, dialog, views);
@@ -75,6 +75,10 @@ namespace MMaker
             }
         }
 
+        /// <summary>
+        /// 프로그램 RUN 환경설정
+        /// </summary>
+        /// <param name="environment"></param>
         private static void InitEnvironment(AppEnvironment environment)
         {
             environment.ProcessFileName         = Process.GetCurrentProcess().MainModule.FileName;
@@ -96,6 +100,11 @@ namespace MMaker
             Directory.CreateDirectory(environment.TempDirectory);
         }
 
+        /// <summary>
+        /// 로그파일 초기화
+        /// </summary>
+        /// <param name="loggerName"></param>
+        /// <param name="logsDirectory"></param>
         private static void InitializeLogger(string loggerName, string logsDirectory)
         {
             var minimumLevel = LogEventLevel.Debug;
@@ -112,10 +121,13 @@ namespace MMaker
             Log.Logger = config.CreateLogger();
         }
 
+        /// <summary>
+        /// Syncfusion 라이브러리 초기화
+        /// </summary>
         private static void InitializeSyncfusion()
         {
             Syncfusion.Windows.Forms.SkinManager.LoadAssembly(typeof(Syncfusion.WinForms.Themes.Office2016Theme).Assembly);
-            SkinManager.ApplicationVisualTheme = "Office2016Colorful"; // Office2016White Office2016Colorful
+            SkinManager.ApplicationVisualTheme = "Office2016Colorful";
         }
     }
 }

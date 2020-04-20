@@ -1,0 +1,796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73EDB1F6-9AD0-4E00-ABE2-89CF30B905C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DrPipe.Diagnosis</RootNamespace>
+    <AssemblyName>DrPipe.Diagnosis</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BruTile, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BruTile.2.1.2\lib\net45\BruTile.dll</HintPath>
+    </Reference>
+    <Reference Include="CoordinateSharp, Version=2.4.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CoordinateSharp.2.4.1.1\lib\net40\CoordinateSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Firebird, Version=7.1.1.0, Culture=neutral, PublicKeyToken=42d22d092898e5f8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.Firebird.7.1.1\lib\net452\EntityFramework.Firebird.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.1.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FirebirdSql.Data.FirebirdClient.7.1.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MathNet.Numerics.4.9.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.3.3, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft-WindowsAPICodePack-Core.1.1.3.3\lib\net452\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.3.3, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.3.3\lib\net452\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\DiagnosisController.cs" />
+    <Compile Include="Controllers\LeakageViewController.cs" />
+    <Compile Include="Controls\ExplorerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ExplorerControl.Designer.cs">
+      <DependentUpon>ExplorerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LayersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LayersControl.Designer.cs">
+      <DependentUpon>LayersControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinqExtensions.cs" />
+    <Compile Include="Models\DataGridModel.cs" />
+    <Compile Include="Models\PipeGroup.cs" />
+    <Compile Include="Models\Pattern.cs" />
+    <Compile Include="Models\PatternValue.cs" />
+    <Compile Include="Models\Pipe.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Common\DataBaseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Common\DataBaseView.Designer.cs">
+      <DependentUpon>DataBaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\BreakageLeakageView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\BreakageLeakageView.Designer.cs">
+      <DependentUpon>BreakageLeakageView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\CoefficientSetupView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\CoefficientSetupView.Designer.cs">
+      <DependentUpon>CoefficientSetupView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\LeakageView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\LeakageView.Designer.cs">
+      <DependentUpon>LeakageView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\PatternView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\PatternView.Designer.cs">
+      <DependentUpon>PatternView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\PressureView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\PressureView.Designer.cs">
+      <DependentUpon>PressureView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\QuantityView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\QuantityView.Designer.cs">
+      <DependentUpon>QuantityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\RoughnessCoefficientView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\RoughnessCoefficientView.Designer.cs">
+      <DependentUpon>RoughnessCoefficientView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\VelocityView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Hydraulics\VelocityView.Designer.cs">
+      <DependentUpon>VelocityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\BrowserView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\BrowserView.Designer.cs">
+      <DependentUpon>BrowserView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\PipeNetworkView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\PipeNetworkView.Designer.cs">
+      <DependentUpon>PipeNetworkView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\PipeNetworkView2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\PipeNetworkView2.Designer.cs">
+      <DependentUpon>PipeNetworkView2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\ReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\PipeNetwork\ReportView.Designer.cs">
+      <DependentUpon>ReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Repair\LeakageHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Repair\LeakageHistory.Designer.cs">
+      <DependentUpon>LeakageHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Repair\LeakageView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Repair\LeakageView.Designer.cs">
+      <DependentUpon>LeakageView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Repair\RoughnessCoefficientView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\Repair\RoughnessCoefficientView.Designer.cs">
+      <DependentUpon>RoughnessCoefficientView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\WaterQuality\BasePurificationPlantView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\WaterQuality\BasePurificationPlantView.Designer.cs">
+      <DependentUpon>BasePurificationPlantView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\WaterQuality\ResidualChlorineView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\WaterQuality\ResidualChlorineView.Designer.cs">
+      <DependentUpon>ResidualChlorineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\WaterQuality\WeightView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\WaterQuality\WeightView.Designer.cs">
+      <DependentUpon>WeightView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\ZoneDivision\BlockInfoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\ZoneDivision\BlockInfoView.Designer.cs">
+      <DependentUpon>BlockInfoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\ZoneDivision\ZoneDivView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Analysis\ZoneDivision\ZoneDivView.Designer.cs">
+      <DependentUpon>ZoneDivView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\AdjustmentDataView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\AdjustmentDataView.Designer.cs">
+      <DependentUpon>AdjustmentDataView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\CorrosionGrowthModelView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\CorrosionGrowthModelView.Designer.cs">
+      <DependentUpon>CorrosionGrowthModelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DirectPrecisionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DirectPrecisionView.Designer.cs">
+      <DependentUpon>DirectPrecisionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DirectSelectedView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DirectSelectedView.Designer.cs">
+      <DependentUpon>DirectSelectedView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DirectSiteDataInputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DirectSiteDataInputView.Designer.cs">
+      <DependentUpon>DirectSiteDataInputView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DiscountRateView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\DiscountRateView.Designer.cs">
+      <DependentUpon>DiscountRateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\IndirectPhysicalView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\IndirectPhysicalView.Designer.cs">
+      <DependentUpon>IndirectPhysicalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\IndirectProfitAndLossView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\IndirectProfitAndLossView.Designer.cs">
+      <DependentUpon>IndirectProfitAndLossView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\IndirectScoreView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\IndirectScoreView.Designer.cs">
+      <DependentUpon>IndirectScoreView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\LeakDataFilterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\LeakDataFilterView.Designer.cs">
+      <DependentUpon>LeakDataFilterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\PaintLifeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\PaintLifeView.Designer.cs">
+      <DependentUpon>PaintLifeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\SimulateConditionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\SimulateConditionView.Designer.cs">
+      <DependentUpon>SimulateConditionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\SimulateConditionAddView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Facility\SimulateConditionAddView.Designer.cs">
+      <DependentUpon>SimulateConditionAddView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\GeneralDecisionMaking\SectionImprovementView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\GeneralDecisionMaking\SectionImprovementView.Designer.cs">
+      <DependentUpon>SectionImprovementView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\GeneralDecisionMaking\ZoneImprovementView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\GeneralDecisionMaking\ZoneImprovementView.Designer.cs">
+      <DependentUpon>ZoneImprovementView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\HydraulicView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\HydraulicView.Designer.cs">
+      <DependentUpon>HydraulicView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\KPressureView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\KPressureView.Designer.cs">
+      <DependentUpon>KPressureView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\PressureReduciongValveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\PressureReduciongValveView.Designer.cs">
+      <DependentUpon>PressureReduciongValveView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\QuantityView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\QuantityView.Designer.cs">
+      <DependentUpon>QuantityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\ValveAddView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\ValveAddView.Designer.cs">
+      <DependentUpon>ValveAddView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\VelocityView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\Repair\VelocityView.Designer.cs">
+      <DependentUpon>VelocityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\BasePipeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\BasePipeView.Designer.cs">
+      <DependentUpon>BasePipeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\BasePurificationPlantView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\BasePurificationPlantView.Designer.cs">
+      <DependentUpon>BasePurificationPlantView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralDataInputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralDataInputView.Designer.cs">
+      <DependentUpon>GeneralDataInputView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralInfringementView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralInfringementView.Designer.cs">
+      <DependentUpon>GeneralInfringementView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralSafeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralSafeView.Designer.cs">
+      <DependentUpon>GeneralSafeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralVolatilityView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\GeneralVolatilityView.Designer.cs">
+      <DependentUpon>GeneralVolatilityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\SurveyPointView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Local\Diagnosis\WaterQuality\SurveyPointView.Designer.cs">
+      <DependentUpon>SurveyPointView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowRateCalculationGAView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowRateCalculationGAView.Designer.cs">
+      <DependentUpon>FlowRateCalculationGAView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowRateCalculationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowRateCalculationView.Designer.cs">
+      <DependentUpon>FlowRateCalculationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowVariabilityView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowVariabilityView.Designer.cs">
+      <DependentUpon>FlowVariabilityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\HydraulicGradientMeasurementView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\HydraulicGradientMeasurementView.Designer.cs">
+      <DependentUpon>HydraulicGradientMeasurementView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\HydraulicGradientOptionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\HydraulicGradientOptionView.Designer.cs">
+      <DependentUpon>HydraulicGradientOptionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\TimeSeriesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\TimeSeriesView.Designer.cs">
+      <DependentUpon>TimeSeriesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\FlowRateManagementView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\FlowRateManagementView.Designer.cs">
+      <DependentUpon>FlowRateManagementView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementDataInputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementDataInputView.Designer.cs">
+      <DependentUpon>MeasurementDataInputView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementPointView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementPointView.Designer.cs">
+      <DependentUpon>MeasurementPointView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementZoneView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementZoneView.Designer.cs">
+      <DependentUpon>MeasurementZoneView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SupplyableAmountView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Wide\Diagnosis\Hydraulics\SupplyableAmountView.Designer.cs">
+      <DependentUpon>SupplyableAmountView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\ExplorerControl.resx">
+      <DependentUpon>ExplorerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LayersControl.resx">
+      <DependentUpon>LayersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Common\DataBaseView.resx">
+      <DependentUpon>DataBaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\BreakageLeakageView.resx">
+      <DependentUpon>BreakageLeakageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\CoefficientSetupView.resx">
+      <DependentUpon>CoefficientSetupView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\LeakageView.resx">
+      <DependentUpon>LeakageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\PatternView.resx">
+      <DependentUpon>PatternView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\PressureView.resx">
+      <DependentUpon>PressureView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\QuantityView.resx">
+      <DependentUpon>QuantityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\RoughnessCoefficientView.resx">
+      <DependentUpon>RoughnessCoefficientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Hydraulics\VelocityView.resx">
+      <DependentUpon>VelocityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\PipeNetwork\BrowserView.resx">
+      <DependentUpon>BrowserView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\PipeNetwork\PipeNetworkView.resx">
+      <DependentUpon>PipeNetworkView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\PipeNetwork\PipeNetworkView2.resx">
+      <DependentUpon>PipeNetworkView2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\PipeNetwork\ReportView.resx">
+      <DependentUpon>ReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Repair\LeakageHistory.resx">
+      <DependentUpon>LeakageHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\Repair\LeakageView.resx">
+      <DependentUpon>LeakageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\WaterQuality\BasePurificationPlantView.resx">
+      <DependentUpon>BasePurificationPlantView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\WaterQuality\ResidualChlorineView.resx">
+      <DependentUpon>ResidualChlorineView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\WaterQuality\WeightView.resx">
+      <DependentUpon>WeightView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\ZoneDivision\BlockInfoView.resx">
+      <DependentUpon>BlockInfoView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Analysis\ZoneDivision\ZoneDivView.resx">
+      <DependentUpon>ZoneDivView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\AdjustmentDataView.resx">
+      <DependentUpon>AdjustmentDataView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\CorrosionGrowthModelView.resx">
+      <DependentUpon>CorrosionGrowthModelView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\DirectSelectedView.resx">
+      <DependentUpon>DirectSelectedView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\DiscountRateView.resx">
+      <DependentUpon>DiscountRateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\IndirectPhysicalView.resx">
+      <DependentUpon>IndirectPhysicalView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\IndirectProfitAndLossView.resx">
+      <DependentUpon>IndirectProfitAndLossView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\IndirectScoreView.resx">
+      <DependentUpon>IndirectScoreView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\LeakDataFilterView.resx">
+      <DependentUpon>LeakDataFilterView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\PaintLifeView.resx">
+      <DependentUpon>PaintLifeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\SimulateConditionView.resx">
+      <DependentUpon>SimulateConditionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Facility\SimulateConditionAddView.resx">
+      <DependentUpon>SimulateConditionAddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\GeneralDecisionMaking\SectionImprovementView.resx">
+      <DependentUpon>SectionImprovementView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\GeneralDecisionMaking\ZoneImprovementView.resx">
+      <DependentUpon>ZoneImprovementView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Repair\HydraulicView.resx">
+      <DependentUpon>HydraulicView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Repair\KPressureView.resx">
+      <DependentUpon>KPressureView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Repair\PressureReduciongValveView.resx">
+      <DependentUpon>PressureReduciongValveView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Repair\QuantityView.resx">
+      <DependentUpon>QuantityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Repair\ValveAddView.resx">
+      <DependentUpon>ValveAddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\Repair\VelocityView.resx">
+      <DependentUpon>VelocityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\BasePipeView.resx">
+      <DependentUpon>BasePipeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\BasePurificationPlantView.resx">
+      <DependentUpon>BasePurificationPlantView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\GeneralDataInputView.resx">
+      <DependentUpon>GeneralDataInputView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\GeneralInfringementView.resx">
+      <DependentUpon>GeneralInfringementView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\GeneralSafeView.resx">
+      <DependentUpon>GeneralSafeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\GeneralVolatilityView.resx">
+      <DependentUpon>GeneralVolatilityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Local\Diagnosis\WaterQuality\SurveyPointView.resx">
+      <DependentUpon>SurveyPointView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowRateCalculationGAView.resx">
+      <DependentUpon>FlowRateCalculationGAView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\FlowVariabilityView.resx">
+      <DependentUpon>FlowVariabilityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\HydraulicGradientMeasurementView.resx">
+      <DependentUpon>HydraulicGradientMeasurementView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\HydraulicGradientOptionView.resx">
+      <DependentUpon>HydraulicGradientOptionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\MathematicalBehavior\TimeSeriesView.resx">
+      <DependentUpon>TimeSeriesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\FlowRateManagementView.resx">
+      <DependentUpon>FlowRateManagementView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementDataInputView.resx">
+      <DependentUpon>MeasurementDataInputView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementPointView.resx">
+      <DependentUpon>MeasurementPointView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Wide\Diagnosis\Hydraulics\SiteMeasurement\MeasurementZoneView.resx">
+      <DependentUpon>MeasurementZoneView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="samples\20191217.dpf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="samples\20191217.inp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="samples\sample.l_dpf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="samples\sample_0.inp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DrPipe.Core\DrPipe.Core.csproj">
+      <Project>{a8334be0-998c-46bd-b071-a3ee1b497895}</Project>
+      <Name>DrPipe.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epanet.net\Epanet.csproj">
+      <Project>{f3001d0d-515d-43b5-b7a0-d77e112cb114}</Project>
+      <Name>Epanet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MindOne.DrPipe\MindOne.DrPipe.csproj">
+      <Project>{c60930c1-8236-45d8-ac8a-a5b7fb316cca}</Project>
+      <Name>MindOne.DrPipe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MindOne.Epanet\MindOne.Epanet.csproj">
+      <Project>{1e3558df-245d-4754-8601-0ef36a41102b}</Project>
+      <Name>MindOne.Epanet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MindOne.Geographics\MindOne.Geographics.csproj">
+      <Project>{46e74838-2544-431a-994a-b92eefb4a386}</Project>
+      <Name>MindOne.Geographics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Triangle\Triangle.csproj">
+      <Project>{f7907a0a-b75f-400b-9e78-bfad00db4d6b}</Project>
+      <Name>Triangle</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Views\Local\Diagnosis\Hydraulics\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

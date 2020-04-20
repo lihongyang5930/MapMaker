@@ -15,7 +15,7 @@ namespace MMaker.Core.Controllers
 {
     public abstract class ControllerBase
     {
-        private const string _dockingItemDefaultTitle = "MapMaker v2.0";
+        private const string _dockingItemDefaultTitle = "MapMaker v2.0.1";
 
         public IShell MmakerShell { get; set; }
         public ViewService Views { get => MmakerShell?.Views; }

@@ -76,6 +76,15 @@ namespace MMaker.Diagnosis.Views
 
             if (_allWTLayerBtns.Cast<RadioButtonAdv>().FirstOrDefault(x => x.Checked).Text != "기타")
             {
+                ///매핑 완료 체크
+                if (_stdColumnCnts != _mappingCnts)
+                {
+                    MessageBox.Show("모든 표준 속성이 매핑 완료된 후"
+                        + "\n진행할 수 있습니다."
+                        , base.MmakerShell.AppTitle);
+                    return;
+                }
+
                 ///선택 레이어를 표준 WTL레이어로 변환한다.
                 IFeatureSet cfs = CurrentFeatureSet();
                 if (cfs == null)
@@ -97,7 +106,7 @@ namespace MMaker.Diagnosis.Views
                         , MessageBoxButtons.YesNo))
                     {
                         MessageBox.Show($"[{cfs.Name}]"
-                            + "\n선택한 레이어는 등록할 수 없습니다."
+                            + "\n선택한 레이어는 중복하여 등록할 수 없습니다."
                             , base.MmakerShell.AppTitle, MessageBoxButtons.YesNo);
                         return;
                     }
@@ -151,15 +160,6 @@ namespace MMaker.Diagnosis.Views
             }
             else
             {
-                ///매핑 완료 체크
-                if (_stdColumnCnts != _mappingCnts)
-                {
-                    MessageBox.Show("모든 표준 속성이 매핑 완료된 후"
-                        + "\n진행할 수 있습니다."
-                        , base.MmakerShell.AppTitle);
-                    return;
-                }
-
                 ///[20200323] fdragons - 동일 이름의 레이어가 이미 로드되어 있으면 합칠 것인지 확인한다.
                 var v = MmakerShell.AppManager.Map.Layers.FirstOrDefault(x => x.DataSet?.Name == _orgData.Name);
                 if (v != null)

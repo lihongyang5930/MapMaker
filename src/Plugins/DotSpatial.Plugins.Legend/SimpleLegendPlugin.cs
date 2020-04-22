@@ -13,6 +13,8 @@ namespace DotSpatial.Plugins.SimpleLegend
     /// </summary>
     public class SimpleLegendPlugin : Extension
     {
+        private Legend _legend;
+
         /// <inheritdoc />
         public override void Activate()
         {
@@ -26,21 +28,26 @@ namespace DotSpatial.Plugins.SimpleLegend
             App.HeaderControl.RemoveAll();
             App.DockManager.Remove("kLegend");
             base.Deactivate();
-        }
+        }   
 
         private void ShowLegend()
         {
-            var legend1 = new Legend { Text = Resources.Legend };
+            _legend = new Legend
+            {
+                Text = "Legend",
+                Name = "legend1",
+            };
+
             if (App.Map != null)
             {
-                App.Map.Legend = legend1;
+                App.Map.Legend = _legend;
             }
 
-            App.Legend = legend1;
+            App.Legend = _legend;
             App.DockManager.Add(
-                new DockablePanel("kLegend"
-                , Resources.Legend
-                , legend1
+                new DockablePanel("kLegend" 
+                , "범례"
+                , _legend
                 , DockStyle.Left)
                 {
                     SmallImage = Resources.legend_16x16

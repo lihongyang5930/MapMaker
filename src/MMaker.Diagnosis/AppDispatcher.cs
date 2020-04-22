@@ -216,7 +216,7 @@ namespace MMaker.Diagnosis
 
             (MmakerShell.Controller as DiagnosisController).ResetBackgroundLayer();
             Map.ZoomToMaxExtent();
-        }
+        }   
 
         private bool HandleLayers(AppCommand command)
         {

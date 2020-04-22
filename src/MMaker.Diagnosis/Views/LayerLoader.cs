@@ -41,6 +41,7 @@ namespace MMaker.Diagnosis.Views
         {
             InitializeComponent();
             _orgData = dataSet;
+
             this._allWTLayerBtns = gbLayerType.GetAllControls(typeof(RadioButtonAdv));
             foreach (var v in this._allWTLayerBtns)
             {
@@ -99,6 +100,7 @@ namespace MMaker.Diagnosis.Views
                 if (v != null)
                 {
                     layer = v;
+
                     if (DialogResult.Yes != MessageBox.Show($"[{cfs.Name}]"
                         + "\n표준 레이어는 이미 로드되어 있습니다."
                         + "\n기존 레이어에 추가 하시겠습니까?"
@@ -165,6 +167,7 @@ namespace MMaker.Diagnosis.Views
                 if (v != null)
                 {
                     layer = v;
+
                     if (DialogResult.Yes != MessageBox.Show($"[{_orgData.Name}]"
                         + "\n동일 레이어가 존재합니다."
                         + "\n기존 레이어에 추가 하시겠습니까?"
@@ -275,6 +278,7 @@ namespace MMaker.Diagnosis.Views
 
             IFeatureSet fc = MMaker.Core.AppStatic.d_Layers[(v.Tag as Core.Models2.IWTL_Layer)];
             fc.Name = v.Text;
+            fc.Projection = DotSpatial.Projections.ProjectionInfo.FromEpsgCode(4326); //EPSG:4326 - WGS84
             return fc;
         }
 

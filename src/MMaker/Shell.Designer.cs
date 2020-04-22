@@ -57,15 +57,15 @@
             this.ribbonControlAdv1.Name = "ribbonControlAdv1";
             this.ribbonControlAdv1.OfficeColorScheme = Syncfusion.Windows.Forms.Tools.ToolStripEx.ColorScheme.Managed;
             // 
-            // ribbonControlAdv1.OfficeMenu
             // 
-            this.ribbonControlAdv1.OfficeMenu.Name = "OfficeMenu";
+            // 
+            this.ribbonControlAdv1.OfficeMenu.Name = "";
             this.ribbonControlAdv1.OfficeMenu.ShowItemToolTips = true;
             this.ribbonControlAdv1.OfficeMenu.Size = new System.Drawing.Size(12, 65);
             this.ribbonControlAdv1.QuickPanelImageLayout = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ribbonControlAdv1.RibbonHeaderImage = Syncfusion.Windows.Forms.Tools.RibbonHeaderImage.None;
             this.ribbonControlAdv1.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
-            this.ribbonControlAdv1.SelectedTab = this.rbMap;
+            this.ribbonControlAdv1.SelectedTab = this.rbGenerator;
             this.ribbonControlAdv1.ShowLauncher = false;
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
@@ -165,11 +165,6 @@
             // appManager
             // 
             this.appManager.Directories = ((System.Collections.Generic.List<string>)(resources.GetObject("appManager.Directories")));
-            this.appManager.DockManager = null;
-            this.appManager.HeaderControl = null;
-            this.appManager.Legend = null;
-            this.appManager.Map = null;
-            this.appManager.ProgressHandler = null;
             // 
             // MmakerShell
             // 
@@ -199,8 +194,7 @@
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem rbMap;
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem rbGenerator;
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem rbTool;
-
-        private DotSpatial.Controls.AppManager appManager;
+        public DotSpatial.Controls.AppManager appManager;
     }
 }
 

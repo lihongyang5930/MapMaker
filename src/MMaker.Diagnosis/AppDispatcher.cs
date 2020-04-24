@@ -151,23 +151,29 @@ namespace MMaker.Diagnosis
                     //}
                     break;
 
-                case AppCommand.OpenProject:
+                case AppCommand.OpenProject: //프로젝트 파일 열기
                     if (Map.Layers.Any() && Map.GetLayers().Count > 1)
                     {
-                        if (DialogResult.No == MessageHelper.AskCritical($"현재 작업중인 레이어가 존재합니다.\n계속 하시겠습니까?"))
+                        if (DialogResult.No == MessageHelper.Ask($"현재 작업중인 레이어가 존재합니다.\n계속 하시겠습니까?"))
                             return false;
 
                         InitProject();
+
+                        // [TODO] fdragons - 프로젝트 파일을 로드한다.
+                        // 프로젝트 파일 구조를 어떻게 설계할것인가 ?
+                        // 프로젝트 파일은 작업중인 지도파일들과 저장하기 이전의 작업환경 정보를 유지해야 할것 같다.
                     }
 
                     MessageHelper.Info("준비중..." + command.EnumToString());
                     return true;
 
                 case AppCommand.NewProject:   //새프로젝트
-                    if (DialogResult.Yes == MessageHelper.AskCritical($"새로운 프로젝트를 만듭니다.\n작업중인 모든 레이어가 제거됩니다.\n계속 하시겠습니까?"))
+                    if (DialogResult.Yes == MessageHelper.Ask($"새로운 프로젝트를 만듭니다.\n작업중인 모든 레이어가 제거됩니다.\n계속 하시겠습니까?"))
                     {
                         InitProject();
                         //App.Project.TryClose();
+
+                        // [TODO] 새프로젝트를 위한 초기 설정을 진행한다.
                     }
                     return true;
 
@@ -209,12 +215,22 @@ namespace MMaker.Diagnosis
             return false;
         }
 
+        /// <summary>
+        /// 프로젝트 초기화
+        /// [20200421] fdragons
+        /// </summary>
         private void InitProject()
         {
+            // 현재 작업중인 모든 레이어를 제거한다.
             MmakerShell.AppManager.Map.ClearLayers();
+
+            // 표준레이어를 생성한다.
             MMaker.Core.AppStatic.ReSetLayers();
 
+            // 배경레이어를 등록한다.
             (MmakerShell.Controller as DiagnosisController).ResetBackgroundLayer();
+
+            // 전체 배경도면 내용이 보이도록 지도를 확대한다.
             Map.ZoomToMaxExtent();
         }   
 

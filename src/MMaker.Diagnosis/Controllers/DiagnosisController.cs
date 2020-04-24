@@ -51,6 +51,8 @@ namespace MMaker.Diagnosis.Controllers
 
             InitializeViews();
 
+            ResetBackgroundLayer();
+
             // make 18 standards WTL layers
             MMaker.Core.AppStatic.ReSetLayers();
         }
@@ -59,8 +61,6 @@ namespace MMaker.Diagnosis.Controllers
         {
             MmakerShell.LegendView = new Geographics.Controls.LegendView() { Visible = false };
             MmakerShell.MapView = new Geographics.Controls.MapView() { Visible = false };
-
-            ResetBackgroundLayer();
         }
 
         public void ResetBackgroundLayer()

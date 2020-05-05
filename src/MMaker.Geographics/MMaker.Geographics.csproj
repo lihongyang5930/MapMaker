@@ -157,7 +157,9 @@
     <Compile Include="Layers\BackgroundLayerSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\LegendView.resx">
       <DependentUpon>LegendView.cs</DependentUpon>

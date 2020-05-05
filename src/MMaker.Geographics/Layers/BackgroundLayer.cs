@@ -1,13 +1,15 @@
 ﻿using BruTile;
 using BruTile.Cache;
+
 using DotSpatial.Controls;
 using DotSpatial.Data;
 using DotSpatial.Projections;
 using DotSpatial.Symbology;
+
 using GeoAPI.Geometries;
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
